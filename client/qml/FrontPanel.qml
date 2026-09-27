@@ -126,7 +126,10 @@ ColumnLayout {
         PanelKey {
             Layout.fillWidth: true
             label: "TUNE"; sub: "ATU cycle"
-            lit: Radio.tuning; lampColor: Ui.tx
+            // Red while tuning; then lit as long as the tuner is on, as the
+            // radio's own TUNE indicator.
+            lit: Radio.tuning || fp.on("TNR")
+            lampColor: Radio.tuning ? Ui.tx : Ui.accent
             enabled: fp.live && !Radio.ptt && !Radio.tuning && Radio.txAllowed
             onClicked: Radio.startTune()
         }

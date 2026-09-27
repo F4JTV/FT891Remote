@@ -126,7 +126,10 @@ QList<AudioDevice> enumerate(bool wantInput, int hostApiIndex)
         a.index  = i;
         // Certains pilotes ALSA rendent un nom vide ou truffe de blancs :
         // une entree illisible dans la liste ne doit jamais arriver.
-        a.name   = QString::fromLocal8Bit(d->name).simplified();
+        // PortAudio gives its names in UTF-8, on Windows too. Read in the
+        // local code page, as they were, an accented name came out garbled
+        // on Windows ("Ã©" for "é"); on Linux the two are the same.
+        a.name   = QString::fromUtf8(d->name).simplified();
         if (a.name.isEmpty()) a.name = QStringLiteral("device %1").arg(i);
         a.maxIn  = d->maxInputChannels;
         a.maxOut = d->maxOutputChannels;
@@ -135,7 +138,7 @@ QList<AudioDevice> enumerate(bool wantInput, int hostApiIndex)
         a.defaultLowLatency = wantInput ? d->defaultLowInputLatency
                                         : d->defaultLowOutputLatency;
         const PaHostApiInfo *h = Pa_GetHostApiInfo(d->hostApi);
-        if (h) a.hostApi = QString::fromLocal8Bit(h->name);
+        if (h) a.hostApi = QString::fromUtf8(h->name);
         list.append(a);
     }
     return list;
@@ -164,7 +167,7 @@ QString AudioEngine::describeDevices()
     QStringList out;
     if (!g_paInit) return QStringLiteral("PortAudio failed to start.\n");
 
-    out << QStringLiteral("PortAudio: %1").arg(QString::fromLocal8Bit(Pa_GetVersionText()));
+    out << QStringLiteral("PortAudio: %1").arg(QString::fromUtf8(Pa_GetVersionText()));
     out << QStringLiteral("Default input  device: %1").arg(Pa_GetDefaultInputDevice());
     out << QStringLiteral("Default output device: %1").arg(Pa_GetDefaultOutputDevice());
     out << QString();
@@ -174,7 +177,7 @@ QString AudioEngine::describeDevices()
         const PaHostApiInfo *h = Pa_GetHostApiInfo(a);
         if (!h) continue;
         out << QStringLiteral("[%1] %2   %3 device(s)")
-                   .arg(a).arg(QString::fromLocal8Bit(h->name)).arg(h->deviceCount);
+                   .arg(a).arg(QString::fromUtf8(h->name)).arg(h->deviceCount);
         for (int d = 0; d < Pa_GetDeviceCount(); ++d) {
             const PaDeviceInfo *i = Pa_GetDeviceInfo(d);
             if (!i || i->hostApi != a) continue;
@@ -185,7 +188,7 @@ QString AudioEngine::describeDevices()
                        .arg(int(i->defaultSampleRate), 6)
                        .arg(i->maxInputChannels  > 0 ? QString::number(int(probeRate(d, true)))  : QStringLiteral("-"), 6)
                        .arg(i->maxOutputChannels > 0 ? QString::number(int(probeRate(d, false))) : QStringLiteral("-"), 6)
-                       .arg(QString::fromLocal8Bit(i->name));
+                       .arg(QString::fromUtf8(i->name));
         }
         out << QString();
     }
@@ -204,7 +207,7 @@ QList<QPair<int, QString>> AudioEngine::hostApis()
     for (int i = 0; i < n; ++i) {
         const PaHostApiInfo *h = Pa_GetHostApiInfo(i);
         if (h && h->deviceCount > 0)
-            l.append({i, QString::fromLocal8Bit(h->name)});
+            l.append({i, QString::fromUtf8(h->name)});
     }
     return l;
 }
@@ -302,11 +305,11 @@ bool AudioEngine::startCapture(int deviceIndex, int framesPerBuffer)
     PaError e = Pa_OpenStream(&s, &pb.p, nullptr, rate,
                               frames > 0 ? static_cast<unsigned long>(frames) : paFramesPerBufferUnspecified,
                               paClipOff, &AudioEngine::inCallback, this);
-    if (e != paNoError) { m_lastError = QString::fromLocal8Bit(Pa_GetErrorText(e)); return false; }
+    if (e != paNoError) { m_lastError = QString::fromUtf8(Pa_GetErrorText(e)); return false; }
     e = Pa_StartStream(s);
     if (e != paNoError) {
         Pa_CloseStream(s);
-        m_lastError = QString::fromLocal8Bit(Pa_GetErrorText(e));
+        m_lastError = QString::fromUtf8(Pa_GetErrorText(e));
         return false;
     }
     m_inStream = s;
@@ -350,11 +353,11 @@ bool AudioEngine::startPlayback(int deviceIndex, int framesPerBuffer)
     PaError e = Pa_OpenStream(&s, nullptr, &pb.p, rate,
                               frames > 0 ? static_cast<unsigned long>(frames) : paFramesPerBufferUnspecified,
                               paClipOff, &AudioEngine::outCallback, this);
-    if (e != paNoError) { m_lastError = QString::fromLocal8Bit(Pa_GetErrorText(e)); return false; }
+    if (e != paNoError) { m_lastError = QString::fromUtf8(Pa_GetErrorText(e)); return false; }
     e = Pa_StartStream(s);
     if (e != paNoError) {
         Pa_CloseStream(s);
-        m_lastError = QString::fromLocal8Bit(Pa_GetErrorText(e));
+        m_lastError = QString::fromUtf8(Pa_GetErrorText(e));
         return false;
     }
     m_outStream = s;
