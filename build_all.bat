@@ -80,6 +80,19 @@ if not exist "%QT_DIR%\bin\windeployqt.exe" (
     echo     Edit QT_DIR at the top of this script.
     goto fail
 )
+rem The client needs Qt Quick, the server Qt Serial Port: both must be part
+rem of this Qt, the one the programs are built and deployed with.
+if not exist "%QT_DIR%\lib\cmake\Qt6Quick\Qt6QuickConfig.cmake" (
+    echo [X] Qt Quick is missing from the Qt at %QT_DIR%
+    echo     Add it with the Qt Maintenance Tool: Qt Quick comes with the
+    echo     MSVC 64-bit build of Qt.
+    goto fail
+)
+if not exist "%QT_DIR%\lib\cmake\Qt6SerialPort\Qt6SerialPortConfig.cmake" (
+    echo [X] Qt Serial Port is missing from the Qt at %QT_DIR%
+    echo     Add it with the Qt Maintenance Tool, under Additional Libraries.
+    goto fail
+)
 echo [ok] Qt          %QT_DIR%
 
 set "VCPKG_TOOLCHAIN=%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake"
@@ -148,9 +161,21 @@ rem -------------------------------------------------------------- configure
 if "%DO_BUILD%"=="1" (
     echo.
     echo === Configuring ===
+    rem Qt6_DIR names this Qt outright. The vcpkg toolchain puts its own
+    rem packages first in the search: a Qt installed in vcpkg for another
+    rem project, without Qt Quick, was found instead, and configuration failed
+    rem on the missing Quick component. Once Qt6_DIR is set, Qt loads every
+    rem module from its own folder.
+    rem VCPKG_APPLOCAL_DEPS is off: vcpkg would copy its own Qt DLLs next to
+    rem the programs, and the deployment below brings the right ones.
+    rem A cache made while the Qt of vcpkg was found still points at it,
+    rem and CMake reuses those paths first: that cache is started afresh.
+    if exist "%BUILD_DIR%\CMakeCache.txt" findstr /i /r /c:"^Qt6.*_DIR:.*vcpkg" "%BUILD_DIR%\CMakeCache.txt" >nul && del /q "%BUILD_DIR%\CMakeCache.txt"
     cmake -B "%BUILD_DIR%" ^
         -DCMAKE_TOOLCHAIN_FILE="%VCPKG_TOOLCHAIN%" ^
-        -DCMAKE_PREFIX_PATH="%QT_DIR%"
+        -DCMAKE_PREFIX_PATH="%QT_DIR%" ^
+        -DQt6_DIR="%QT_DIR%\lib\cmake\Qt6" ^
+        -DVCPKG_APPLOCAL_DEPS=OFF
     if errorlevel 1 (
         echo [X] Configuration failed.
         goto fail
