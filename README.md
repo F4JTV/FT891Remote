@@ -18,9 +18,6 @@ laid out the way the radio lays it out.
 
 ## Screenshots
 
-Taken with the FT-891 simulator of `test/`, the real server and the real
-client on one machine.
-
 | Desktop client | Transmitting |
 |---|---|
 | ![Front panel and FUNCTION-1 page](docs/screenshots/client-desktop-01-panel.png) | ![PO, SWR, ALC and COMP meters while transmitting](docs/screenshots/client-desktop-02-transmit.png) |
