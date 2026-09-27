@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/cat">
+        <file>ft891.json</file>
+    </qresource>
+</RCC>

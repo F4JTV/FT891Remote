@@ -1,0 +1,6465 @@
+{
+  "rig": "Yaesu FT-891",
+  "protocol": "ascii-semicolon",
+  "identify": "0650",
+  "verified": true,
+  "source": "FT-891 CAT Operation Reference Book, 1909-C; every command tried on a real FT-891 over CAT at 38400 baud",
+  "groups": [
+    {
+      "name": "CORE",
+      "poll": "core",
+      "hidden": true,
+      "commands": [
+        {
+          "code": "FA",
+          "name": "VFO-A frequency",
+          "set": "FA{p1};",
+          "read": "FA;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Frequency",
+              "type": "range",
+              "min": 30000,
+              "max": 56000000,
+              "digits": 9,
+              "unit": "Hz"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "FB",
+          "name": "VFO-B frequency",
+          "set": "FB{p1};",
+          "read": "FB;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Frequency",
+              "type": "range",
+              "min": 30000,
+              "max": 56000000,
+              "digits": 9,
+              "unit": "Hz"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MD",
+          "name": "Operating mode",
+          "set": "MD0{p1};",
+          "read": "MD0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Mode",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "1",
+                  "label": "LSB"
+                },
+                {
+                  "v": "2",
+                  "label": "USB"
+                },
+                {
+                  "v": "3",
+                  "label": "CW-U"
+                },
+                {
+                  "v": "4",
+                  "label": "FM"
+                },
+                {
+                  "v": "5",
+                  "label": "AM"
+                },
+                {
+                  "v": "6",
+                  "label": "RTTY-L"
+                },
+                {
+                  "v": "7",
+                  "label": "CW-L"
+                },
+                {
+                  "v": "8",
+                  "label": "DATA-L"
+                },
+                {
+                  "v": "9",
+                  "label": "RTTY-U"
+                },
+                {
+                  "v": "A",
+                  "label": "DATA-FM"
+                },
+                {
+                  "v": "B",
+                  "label": "FM-N"
+                },
+                {
+                  "v": "C",
+                  "label": "DATA-U"
+                },
+                {
+                  "v": "D",
+                  "label": "AM-N"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "TX",
+          "name": "Transmit",
+          "set": "TX{p1};",
+          "read": "TX;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "State",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "RX"
+                },
+                {
+                  "v": "1",
+                  "label": "TX (CAT)"
+                },
+                {
+                  "v": "2",
+                  "label": "TX (radio)",
+                  "readonly": true,
+                  "as": "1"
+                }
+              ]
+            }
+          ],
+          "note": "0 receive; 1 transmitting on CAT's command; 2 transmitting on the radio's own PTT or MOX (answer only).",
+          "verified": true
+        },
+        {
+          "code": "BS",
+          "name": "Band select",
+          "set": "BS{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Band",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "160 m"
+                },
+                {
+                  "v": "01",
+                  "label": "80 m"
+                },
+                {
+                  "v": "03",
+                  "label": "40 m"
+                },
+                {
+                  "v": "04",
+                  "label": "30 m"
+                },
+                {
+                  "v": "05",
+                  "label": "20 m"
+                },
+                {
+                  "v": "06",
+                  "label": "17 m"
+                },
+                {
+                  "v": "07",
+                  "label": "15 m"
+                },
+                {
+                  "v": "08",
+                  "label": "12 m"
+                },
+                {
+                  "v": "09",
+                  "label": "10 m"
+                },
+                {
+                  "v": "10",
+                  "label": "6 m"
+                },
+                {
+                  "v": "11",
+                  "label": "GEN"
+                },
+                {
+                  "v": "12",
+                  "label": "MW"
+                }
+              ]
+            }
+          ],
+          "note": "Band stack numbers of the FT-891 CAT reference: 00 1.8 MHz to 10 50 MHz, 11 GEN, 12 MW; 02 is not used, so 60 m has no band-stack key.",
+          "verified": true
+        },
+        {
+          "code": "BU",
+          "name": "Band up",
+          "set": "BU0;",
+          "verified": true
+        },
+        {
+          "code": "BD",
+          "name": "Band down",
+          "set": "BD0;",
+          "verified": true
+        },
+        {
+          "code": "FS",
+          "name": "FAST — dial speed",
+          "set": "FS{p1};",
+          "read": "FS;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Fast",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "VM",
+          "name": "V/M — VFO / memory",
+          "set": "VM;",
+          "verified": true
+        },
+        {
+          "code": "MC",
+          "name": "Memory channel",
+          "set": "MC{p1};",
+          "read": "MC;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Channel",
+              "type": "range",
+              "min": 1,
+              "max": 99,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MA",
+          "name": "Memory to VFO-A",
+          "set": "MA;",
+          "verified": true
+        },
+        {
+          "code": "AM",
+          "name": "VFO-A to memory",
+          "set": "AM;",
+          "confirm": "Overwrite the current memory channel with VFO-A?",
+          "verified": true
+        },
+        {
+          "code": "RU",
+          "name": "Clarifier up",
+          "set": "RU{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Offset",
+              "type": "range",
+              "min": 0,
+              "max": 9999,
+              "digits": 4,
+              "unit": "Hz"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "RD",
+          "name": "Clarifier down",
+          "set": "RD{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Offset",
+              "type": "range",
+              "min": 0,
+              "max": 9999,
+              "digits": 4,
+              "unit": "Hz"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "PS",
+          "name": "Power switch",
+          "set": "PS{p1};",
+          "read": "PS;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "note": "Switching on needs a wake-up: the server sends PS1; twice, one second apart.",
+          "confirm": "Switch the radio off? It can only be switched back on over CAT if its USB port stays powered.",
+          "verified": true
+        },
+        {
+          "code": "AI",
+          "name": "Auto information",
+          "set": "AI{p1};",
+          "read": "AI;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Auto information",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "note": "Kept off by the server, which reads the radio on its own schedule.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "name": "FUNCTION-1",
+      "commands": [
+        {
+          "code": "TNR",
+          "name": "TNR — antenna tuner",
+          "set": "AC00{p1};",
+          "read": "AC;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Tuner",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                },
+                {
+                  "v": "2",
+                  "label": "Start tuning"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "VOX",
+          "name": "VOX",
+          "set": "VX{p1};",
+          "read": "VX;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "VOX",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "PRC",
+          "name": "PRC — speech processor",
+          "set": "PR0{p1};",
+          "read": "PR0;",
+          "companion": "PRC-LVL",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Processor",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "PRC-LVL",
+          "name": "PRC — processor level",
+          "set": "PL{p1};",
+          "read": "PL;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MON",
+          "name": "MON — monitor",
+          "set": "ML0{p1};",
+          "read": "ML0;",
+          "companion": "MON-LVL",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Monitor",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "000",
+                  "label": "OFF"
+                },
+                {
+                  "v": "001",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MON-LVL",
+          "name": "MON — monitor level",
+          "set": "ML1{p1};",
+          "read": "ML1;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "SPL",
+          "name": "SPL — split",
+          "set": "ST{p1};",
+          "read": "RIC;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Split",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true,
+          "answer": "RIC",
+          "note": "Switched with ST (0 off, 1 on); read through RI (SPLIT indicator)."
+        },
+        {
+          "code": "QSPL",
+          "name": "QS — quick split",
+          "set": "QS;",
+          "note": "VFO-B takes the frequency of VFO-A moved by menu 05-13 QUICK SPL FREQ, and split is switched on.",
+          "verified": true
+        },
+        {
+          "code": "IPO",
+          "name": "IPO — preamplifier",
+          "set": "PA0{p1};",
+          "read": "PA0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Front end",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "IPO"
+                },
+                {
+                  "v": "1",
+                  "label": "AMP"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "ATT",
+          "name": "ATT — attenuator",
+          "set": "RA0{p1};",
+          "read": "RA0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Attenuator",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "NAR",
+          "name": "NAR — narrow",
+          "set": "NA0{p1};",
+          "read": "NA0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Narrow",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "NB",
+          "name": "NB — noise blanker",
+          "set": "NB0{p1};",
+          "read": "NB0;",
+          "companion": "NB-LVL",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Blanker",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "NB-LVL",
+          "name": "NB — blanker level",
+          "set": "NL0{p1};",
+          "read": "NL0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 10,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "SFT",
+          "name": "SFT — IF shift",
+          "set": "IS0{p1}{p2};",
+          "read": "IS0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Shift",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            },
+            {
+              "id": "p2",
+              "name": "Offset",
+              "type": "range",
+              "min": -1200,
+              "max": 1200,
+              "digits": 5,
+              "unit": "Hz",
+              "step": 20,
+              "signed": true
+            }
+          ],
+          "note": "IF shift on/off, then the offset: IS01+0500; turns the shift on at +500 Hz.",
+          "verified": true
+        },
+        {
+          "code": "WDH",
+          "name": "WDH — width",
+          "set": "SH0{p1}{p2};",
+          "read": "SH0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Width",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            },
+            {
+              "id": "p2",
+              "name": "Step",
+              "type": "range",
+              "min": 0,
+              "max": 21,
+              "digits": 2
+            }
+          ],
+          "note": "Width on: the step applies; off: the mode's default width. The steps, and the bandwidth each one gives, depend on the mode and on NARROW: SSB 09-21 (01-09 narrow), CW, RTTY and DATA 10-17 (01-10 narrow); none in AM and FM.",
+          "verified": true
+        },
+        {
+          "code": "NCH",
+          "name": "NCH — IF notch",
+          "set": "BP00{p1};",
+          "read": "BP00;",
+          "companion": "NCH-FRQ",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Notch",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "000",
+                  "label": "OFF"
+                },
+                {
+                  "v": "001",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "NCH-FRQ",
+          "name": "NCH — notch frequency",
+          "set": "BP01{p1};",
+          "read": "BP01;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Frequency",
+              "type": "range",
+              "min": 1,
+              "max": 320,
+              "digits": 3,
+              "unit": "x10 Hz",
+              "display": {
+                "scale": 10,
+                "unit": "Hz"
+              }
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "panel"
+    },
+    {
+      "name": "FUNCTION-2",
+      "commands": [
+        {
+          "code": "MTR",
+          "name": "MTR — transmit meter",
+          "set": "MS{p1};",
+          "read": "MS;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Meter",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "COMP"
+                },
+                {
+                  "v": "1",
+                  "label": "ALC"
+                },
+                {
+                  "v": "2",
+                  "label": "PO"
+                },
+                {
+                  "v": "3",
+                  "label": "SWR"
+                },
+                {
+                  "v": "4",
+                  "label": "ID"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "AGC",
+          "name": "AGC",
+          "set": "GT0{p1};",
+          "read": "GT0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "AGC",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "FAST"
+                },
+                {
+                  "v": "2",
+                  "label": "MID"
+                },
+                {
+                  "v": "3",
+                  "label": "SLOW"
+                },
+                {
+                  "v": "4",
+                  "label": "AUTO"
+                },
+                {
+                  "v": "5",
+                  "label": "AUTO-MID",
+                  "readonly": true,
+                  "as": "4"
+                },
+                {
+                  "v": "6",
+                  "label": "AUTO-SLOW",
+                  "readonly": true,
+                  "as": "4"
+                }
+              ]
+            }
+          ],
+          "verified": true,
+          "note": "Set to AUTO, the radio answers AUTO-FAST (shown as AUTO), AUTO-MID or AUTO-SLOW, depending on the mode."
+        },
+        {
+          "code": "DNR",
+          "name": "DNR — noise reduction",
+          "set": "NR0{p1};",
+          "read": "NR0;",
+          "companion": "DNR-LVL",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Reduction",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "DNR-LVL",
+          "name": "DNR — algorithm",
+          "set": "RL0{p1};",
+          "read": "RL0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Algorithm",
+              "type": "range",
+              "min": 1,
+              "max": 15,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "DNF",
+          "name": "DNF — auto notch",
+          "set": "BC0{p1};",
+          "read": "BC0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Auto notch",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "CNT",
+          "name": "CNT — contour",
+          "set": "CO00{p1};",
+          "read": "CO00;",
+          "companion": "CNT-FRQ",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Contour",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0000",
+                  "label": "OFF"
+                },
+                {
+                  "v": "0001",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "CNT-FRQ",
+          "name": "CNT — contour frequency",
+          "set": "CO01{p1};",
+          "read": "CO01;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Frequency",
+              "type": "range",
+              "min": 10,
+              "max": 3200,
+              "digits": 4,
+              "unit": "Hz"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MOX",
+          "name": "MOX",
+          "set": "MX{p1};",
+          "read": "MX;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "MOX",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "TXW",
+          "name": "TXW — listen on transmit frequency",
+          "set": "TS{p1};",
+          "read": "TS;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "TXW",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MEQ",
+          "name": "MEQ — parametric microphone equaliser",
+          "set": "PR1{p1};",
+          "read": "PR1;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Equaliser",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "QMB-STO",
+          "name": "QMB — store",
+          "set": "QI;",
+          "verified": true
+        },
+        {
+          "code": "QMB-RCL",
+          "name": "QMB — recall",
+          "set": "QR;",
+          "verified": true
+        },
+        {
+          "code": "SCAN",
+          "name": "SCAN",
+          "set": "SC{p1};",
+          "read": "SC;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Scan",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "UP"
+                },
+                {
+                  "v": "2",
+                  "label": "DOWN"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "panel"
+    },
+    {
+      "name": "CW SETTING",
+      "commands": [
+        {
+          "code": "SPEED",
+          "name": "SPEED — keyer speed",
+          "set": "KS{p1};",
+          "read": "KS;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Speed",
+              "type": "range",
+              "min": 4,
+              "max": 60,
+              "digits": 3,
+              "unit": "WPM"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "APF",
+          "name": "APF — audio peak filter",
+          "set": "CO02{p1};",
+          "read": "CO02;",
+          "companion": "APF-FRQ",
+          "params": [
+            {
+              "id": "p1",
+              "name": "APF",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0000",
+                  "label": "OFF"
+                },
+                {
+                  "v": "0001",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "APF-FRQ",
+          "name": "APF — frequency",
+          "set": "CO03{p1};",
+          "read": "CO03;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Offset",
+              "type": "range",
+              "min": 0,
+              "max": 50,
+              "digits": 4,
+              "unit": "0000=-250 Hz, 10 Hz steps",
+              "display": {
+                "offset": -250,
+                "scale": 10,
+                "unit": "Hz"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "PITCH",
+          "name": "PITCH",
+          "set": "KP{p1};",
+          "read": "KP;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Pitch",
+              "type": "range",
+              "min": 0,
+              "max": 75,
+              "digits": 2,
+              "unit": "00=300 Hz, 10 Hz steps",
+              "display": {
+                "offset": 300,
+                "scale": 10,
+                "unit": "Hz"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "KEYER",
+          "name": "KEYER",
+          "set": "KR{p1};",
+          "read": "KR;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Keyer",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "BK-IN",
+          "name": "BK-IN — break-in",
+          "set": "BI{p1};",
+          "read": "BI;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Break-in",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "BK-DLY",
+          "name": "BK-IN — delay",
+          "set": "SD{p1};",
+          "read": "SD;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 30,
+              "max": 3000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 10
+            }
+          ],
+          "verified": true,
+          "note": "BREAK-IN delay, 30 to 3000 ms in 10 ms steps (menu 07-09 CW BK-IN DELAY)."
+        },
+        {
+          "code": "ZIN",
+          "name": "Zero in",
+          "set": "ZI;",
+          "verified": true
+        },
+        {
+          "code": "SPOT",
+          "name": "CW spot",
+          "set": "CS{p1};",
+          "read": "CS;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Spot",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "panel"
+    },
+    {
+      "name": "CW MEMORY",
+      "poll": "menu",
+      "commands": [
+        {
+          "code": "KM1",
+          "name": "Keyer memory 1 — text",
+          "set": "KM1{p1};",
+          "read": "KM1;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Text",
+              "type": "text",
+              "maxLength": 50
+            }
+          ],
+          "note": "Played as typed only when menu 04-07 CW MEMORY 1 is set to TEXT.",
+          "verified": true
+        },
+        {
+          "code": "KM2",
+          "name": "Keyer memory 2 — text",
+          "set": "KM2{p1};",
+          "read": "KM2;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Text",
+              "type": "text",
+              "maxLength": 50
+            }
+          ],
+          "note": "Played as typed only when menu 04-08 CW MEMORY 2 is set to TEXT.",
+          "verified": true
+        },
+        {
+          "code": "KM3",
+          "name": "Keyer memory 3 — text",
+          "set": "KM3{p1};",
+          "read": "KM3;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Text",
+              "type": "text",
+              "maxLength": 50
+            }
+          ],
+          "note": "Played as typed only when menu 04-09 CW MEMORY 3 is set to TEXT.",
+          "verified": true
+        },
+        {
+          "code": "KM4",
+          "name": "Keyer memory 4 — text",
+          "set": "KM4{p1};",
+          "read": "KM4;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Text",
+              "type": "text",
+              "maxLength": 50
+            }
+          ],
+          "note": "Played as typed only when menu 04-10 CW MEMORY 4 is set to TEXT.",
+          "verified": true
+        },
+        {
+          "code": "KM5",
+          "name": "Keyer memory 5 — text",
+          "set": "KM5{p1};",
+          "read": "KM5;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Text",
+              "type": "text",
+              "maxLength": 50
+            }
+          ],
+          "note": "Played as typed only when menu 04-11 CW MEMORY 5 is set to TEXT.",
+          "verified": true
+        },
+        {
+          "code": "KY1",
+          "name": "Keyer memory 1 — play (TEXT)",
+          "set": "KY6;",
+          "note": "Plays the text of keyer memory 1 (written with KM1), for a memory set to TEXT in menu 04-07. On the FT-891 a TEXT memory is played by KY6-KYA; KY1-KY5 are refused (\"?\").",
+          "verified": true
+        },
+        {
+          "code": "KY2",
+          "name": "Keyer memory 2 — play (TEXT)",
+          "set": "KY7;",
+          "note": "Plays the text of keyer memory 2 (written with KM2), for a memory set to TEXT in menu 04-08. On the FT-891 a TEXT memory is played by KY6-KYA; KY1-KY5 are refused (\"?\").",
+          "verified": true
+        },
+        {
+          "code": "KY3",
+          "name": "Keyer memory 3 — play (TEXT)",
+          "set": "KY8;",
+          "note": "Plays the text of keyer memory 3 (written with KM3), for a memory set to TEXT in menu 04-09. On the FT-891 a TEXT memory is played by KY6-KYA; KY1-KY5 are refused (\"?\").",
+          "verified": true
+        },
+        {
+          "code": "KY4",
+          "name": "Keyer memory 4 — play (TEXT)",
+          "set": "KY9;",
+          "note": "Plays the text of keyer memory 4 (written with KM4), for a memory set to TEXT in menu 04-10. On the FT-891 a TEXT memory is played by KY6-KYA; KY1-KY5 are refused (\"?\").",
+          "verified": true
+        },
+        {
+          "code": "KY5",
+          "name": "Keyer memory 5 — play (TEXT)",
+          "set": "KYA;",
+          "note": "Plays the text of keyer memory 5 (written with KM5), for a memory set to TEXT in menu 04-11. On the FT-891 a TEXT memory is played by KY6-KYA; KY1-KY5 are refused (\"?\").",
+          "verified": true
+        },
+        {
+          "code": "MSG1",
+          "name": "Keyer memory 1 — play (MESSAGE)",
+          "set": "KY1;",
+          "note": "Plays the message recorded with the paddle, for memory 1 set to MESSAGE in menu 04-07.",
+          "verified": true
+        },
+        {
+          "code": "MSG2",
+          "name": "Keyer memory 2 — play (MESSAGE)",
+          "set": "KY2;",
+          "note": "Plays the message recorded with the paddle, for memory 2 set to MESSAGE in menu 04-08.",
+          "verified": true
+        },
+        {
+          "code": "MSG3",
+          "name": "Keyer memory 3 — play (MESSAGE)",
+          "set": "KY3;",
+          "note": "Plays the message recorded with the paddle, for memory 3 set to MESSAGE in menu 04-09.",
+          "verified": true
+        },
+        {
+          "code": "MSG4",
+          "name": "Keyer memory 4 — play (MESSAGE)",
+          "set": "KY4;",
+          "note": "Plays the message recorded with the paddle, for memory 4 set to MESSAGE in menu 04-10.",
+          "verified": true
+        },
+        {
+          "code": "MSG5",
+          "name": "Keyer memory 5 — play (MESSAGE)",
+          "set": "KY5;",
+          "note": "Plays the message recorded with the paddle, for memory 5 set to MESSAGE in menu 04-11.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "name": "FM SETTING",
+      "commands": [
+        {
+          "code": "T/DCS",
+          "name": "T/DCS — tone mode",
+          "set": "CT0{p1};",
+          "read": "CT0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Mode",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "CTCSS ENC/DEC"
+                },
+                {
+                  "v": "2",
+                  "label": "CTCSS ENC"
+                },
+                {
+                  "v": "3",
+                  "label": "DCS"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "TONE",
+          "name": "TONE — CTCSS frequency",
+          "set": "CN00{p1};",
+          "read": "CN00;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Tone",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "000",
+                  "label": "67.0 Hz"
+                },
+                {
+                  "v": "001",
+                  "label": "69.3 Hz"
+                },
+                {
+                  "v": "002",
+                  "label": "71.9 Hz"
+                },
+                {
+                  "v": "003",
+                  "label": "74.4 Hz"
+                },
+                {
+                  "v": "004",
+                  "label": "77.0 Hz"
+                },
+                {
+                  "v": "005",
+                  "label": "79.7 Hz"
+                },
+                {
+                  "v": "006",
+                  "label": "82.5 Hz"
+                },
+                {
+                  "v": "007",
+                  "label": "85.4 Hz"
+                },
+                {
+                  "v": "008",
+                  "label": "88.5 Hz"
+                },
+                {
+                  "v": "009",
+                  "label": "91.5 Hz"
+                },
+                {
+                  "v": "010",
+                  "label": "94.8 Hz"
+                },
+                {
+                  "v": "011",
+                  "label": "97.4 Hz"
+                },
+                {
+                  "v": "012",
+                  "label": "100.0 Hz"
+                },
+                {
+                  "v": "013",
+                  "label": "103.5 Hz"
+                },
+                {
+                  "v": "014",
+                  "label": "107.2 Hz"
+                },
+                {
+                  "v": "015",
+                  "label": "110.9 Hz"
+                },
+                {
+                  "v": "016",
+                  "label": "114.8 Hz"
+                },
+                {
+                  "v": "017",
+                  "label": "118.8 Hz"
+                },
+                {
+                  "v": "018",
+                  "label": "123.0 Hz"
+                },
+                {
+                  "v": "019",
+                  "label": "127.3 Hz"
+                },
+                {
+                  "v": "020",
+                  "label": "131.8 Hz"
+                },
+                {
+                  "v": "021",
+                  "label": "136.5 Hz"
+                },
+                {
+                  "v": "022",
+                  "label": "141.3 Hz"
+                },
+                {
+                  "v": "023",
+                  "label": "146.2 Hz"
+                },
+                {
+                  "v": "024",
+                  "label": "151.4 Hz"
+                },
+                {
+                  "v": "025",
+                  "label": "156.7 Hz"
+                },
+                {
+                  "v": "026",
+                  "label": "159.8 Hz"
+                },
+                {
+                  "v": "027",
+                  "label": "162.2 Hz"
+                },
+                {
+                  "v": "028",
+                  "label": "165.5 Hz"
+                },
+                {
+                  "v": "029",
+                  "label": "167.9 Hz"
+                },
+                {
+                  "v": "030",
+                  "label": "171.3 Hz"
+                },
+                {
+                  "v": "031",
+                  "label": "173.8 Hz"
+                },
+                {
+                  "v": "032",
+                  "label": "177.3 Hz"
+                },
+                {
+                  "v": "033",
+                  "label": "179.9 Hz"
+                },
+                {
+                  "v": "034",
+                  "label": "183.5 Hz"
+                },
+                {
+                  "v": "035",
+                  "label": "186.2 Hz"
+                },
+                {
+                  "v": "036",
+                  "label": "189.9 Hz"
+                },
+                {
+                  "v": "037",
+                  "label": "192.8 Hz"
+                },
+                {
+                  "v": "038",
+                  "label": "196.6 Hz"
+                },
+                {
+                  "v": "039",
+                  "label": "199.5 Hz"
+                },
+                {
+                  "v": "040",
+                  "label": "203.5 Hz"
+                },
+                {
+                  "v": "041",
+                  "label": "206.5 Hz"
+                },
+                {
+                  "v": "042",
+                  "label": "210.7 Hz"
+                },
+                {
+                  "v": "043",
+                  "label": "218.1 Hz"
+                },
+                {
+                  "v": "044",
+                  "label": "225.7 Hz"
+                },
+                {
+                  "v": "045",
+                  "label": "229.1 Hz"
+                },
+                {
+                  "v": "046",
+                  "label": "233.6 Hz"
+                },
+                {
+                  "v": "047",
+                  "label": "241.8 Hz"
+                },
+                {
+                  "v": "048",
+                  "label": "250.3 Hz"
+                },
+                {
+                  "v": "049",
+                  "label": "254.1 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "DCS",
+          "name": "DCS — code",
+          "set": "CN01{p1};",
+          "read": "CN01;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Code",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "000",
+                  "label": "023"
+                },
+                {
+                  "v": "001",
+                  "label": "025"
+                },
+                {
+                  "v": "002",
+                  "label": "026"
+                },
+                {
+                  "v": "003",
+                  "label": "031"
+                },
+                {
+                  "v": "004",
+                  "label": "032"
+                },
+                {
+                  "v": "005",
+                  "label": "036"
+                },
+                {
+                  "v": "006",
+                  "label": "043"
+                },
+                {
+                  "v": "007",
+                  "label": "047"
+                },
+                {
+                  "v": "008",
+                  "label": "051"
+                },
+                {
+                  "v": "009",
+                  "label": "053"
+                },
+                {
+                  "v": "010",
+                  "label": "054"
+                },
+                {
+                  "v": "011",
+                  "label": "065"
+                },
+                {
+                  "v": "012",
+                  "label": "071"
+                },
+                {
+                  "v": "013",
+                  "label": "072"
+                },
+                {
+                  "v": "014",
+                  "label": "073"
+                },
+                {
+                  "v": "015",
+                  "label": "074"
+                },
+                {
+                  "v": "016",
+                  "label": "114"
+                },
+                {
+                  "v": "017",
+                  "label": "115"
+                },
+                {
+                  "v": "018",
+                  "label": "116"
+                },
+                {
+                  "v": "019",
+                  "label": "122"
+                },
+                {
+                  "v": "020",
+                  "label": "125"
+                },
+                {
+                  "v": "021",
+                  "label": "131"
+                },
+                {
+                  "v": "022",
+                  "label": "132"
+                },
+                {
+                  "v": "023",
+                  "label": "134"
+                },
+                {
+                  "v": "024",
+                  "label": "143"
+                },
+                {
+                  "v": "025",
+                  "label": "145"
+                },
+                {
+                  "v": "026",
+                  "label": "152"
+                },
+                {
+                  "v": "027",
+                  "label": "155"
+                },
+                {
+                  "v": "028",
+                  "label": "156"
+                },
+                {
+                  "v": "029",
+                  "label": "162"
+                },
+                {
+                  "v": "030",
+                  "label": "165"
+                },
+                {
+                  "v": "031",
+                  "label": "172"
+                },
+                {
+                  "v": "032",
+                  "label": "174"
+                },
+                {
+                  "v": "033",
+                  "label": "205"
+                },
+                {
+                  "v": "034",
+                  "label": "212"
+                },
+                {
+                  "v": "035",
+                  "label": "223"
+                },
+                {
+                  "v": "036",
+                  "label": "225"
+                },
+                {
+                  "v": "037",
+                  "label": "226"
+                },
+                {
+                  "v": "038",
+                  "label": "243"
+                },
+                {
+                  "v": "039",
+                  "label": "244"
+                },
+                {
+                  "v": "040",
+                  "label": "245"
+                },
+                {
+                  "v": "041",
+                  "label": "246"
+                },
+                {
+                  "v": "042",
+                  "label": "251"
+                },
+                {
+                  "v": "043",
+                  "label": "252"
+                },
+                {
+                  "v": "044",
+                  "label": "255"
+                },
+                {
+                  "v": "045",
+                  "label": "261"
+                },
+                {
+                  "v": "046",
+                  "label": "263"
+                },
+                {
+                  "v": "047",
+                  "label": "265"
+                },
+                {
+                  "v": "048",
+                  "label": "266"
+                },
+                {
+                  "v": "049",
+                  "label": "271"
+                },
+                {
+                  "v": "050",
+                  "label": "274"
+                },
+                {
+                  "v": "051",
+                  "label": "306"
+                },
+                {
+                  "v": "052",
+                  "label": "311"
+                },
+                {
+                  "v": "053",
+                  "label": "315"
+                },
+                {
+                  "v": "054",
+                  "label": "325"
+                },
+                {
+                  "v": "055",
+                  "label": "331"
+                },
+                {
+                  "v": "056",
+                  "label": "332"
+                },
+                {
+                  "v": "057",
+                  "label": "343"
+                },
+                {
+                  "v": "058",
+                  "label": "346"
+                },
+                {
+                  "v": "059",
+                  "label": "351"
+                },
+                {
+                  "v": "060",
+                  "label": "356"
+                },
+                {
+                  "v": "061",
+                  "label": "364"
+                },
+                {
+                  "v": "062",
+                  "label": "365"
+                },
+                {
+                  "v": "063",
+                  "label": "371"
+                },
+                {
+                  "v": "064",
+                  "label": "411"
+                },
+                {
+                  "v": "065",
+                  "label": "412"
+                },
+                {
+                  "v": "066",
+                  "label": "413"
+                },
+                {
+                  "v": "067",
+                  "label": "423"
+                },
+                {
+                  "v": "068",
+                  "label": "431"
+                },
+                {
+                  "v": "069",
+                  "label": "432"
+                },
+                {
+                  "v": "070",
+                  "label": "445"
+                },
+                {
+                  "v": "071",
+                  "label": "446"
+                },
+                {
+                  "v": "072",
+                  "label": "452"
+                },
+                {
+                  "v": "073",
+                  "label": "454"
+                },
+                {
+                  "v": "074",
+                  "label": "455"
+                },
+                {
+                  "v": "075",
+                  "label": "462"
+                },
+                {
+                  "v": "076",
+                  "label": "464"
+                },
+                {
+                  "v": "077",
+                  "label": "465"
+                },
+                {
+                  "v": "078",
+                  "label": "466"
+                },
+                {
+                  "v": "079",
+                  "label": "503"
+                },
+                {
+                  "v": "080",
+                  "label": "506"
+                },
+                {
+                  "v": "081",
+                  "label": "516"
+                },
+                {
+                  "v": "082",
+                  "label": "523"
+                },
+                {
+                  "v": "083",
+                  "label": "526"
+                },
+                {
+                  "v": "084",
+                  "label": "532"
+                },
+                {
+                  "v": "085",
+                  "label": "546"
+                },
+                {
+                  "v": "086",
+                  "label": "565"
+                },
+                {
+                  "v": "087",
+                  "label": "606"
+                },
+                {
+                  "v": "088",
+                  "label": "612"
+                },
+                {
+                  "v": "089",
+                  "label": "624"
+                },
+                {
+                  "v": "090",
+                  "label": "627"
+                },
+                {
+                  "v": "091",
+                  "label": "631"
+                },
+                {
+                  "v": "092",
+                  "label": "632"
+                },
+                {
+                  "v": "093",
+                  "label": "654"
+                },
+                {
+                  "v": "094",
+                  "label": "662"
+                },
+                {
+                  "v": "095",
+                  "label": "664"
+                },
+                {
+                  "v": "096",
+                  "label": "703"
+                },
+                {
+                  "v": "097",
+                  "label": "712"
+                },
+                {
+                  "v": "098",
+                  "label": "723"
+                },
+                {
+                  "v": "099",
+                  "label": "731"
+                },
+                {
+                  "v": "100",
+                  "label": "732"
+                },
+                {
+                  "v": "101",
+                  "label": "734"
+                },
+                {
+                  "v": "102",
+                  "label": "743"
+                },
+                {
+                  "v": "103",
+                  "label": "754"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "RPT",
+          "name": "RPT — repeater shift",
+          "set": "OS0{p1};",
+          "read": "OS0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Shift",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "Simplex"
+                },
+                {
+                  "v": "1",
+                  "label": "+"
+                },
+                {
+                  "v": "2",
+                  "label": "−"
+                }
+              ]
+            }
+          ],
+          "note": "Only accepted in FM.",
+          "verified": true
+        }
+      ],
+      "poll": "panel"
+    },
+    {
+      "name": "DVS",
+      "poll": "menu",
+      "commands": [
+        {
+          "code": "PB",
+          "name": "Voice memory playback",
+          "set": "PB0{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Channel",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "Stop"
+                },
+                {
+                  "v": "1",
+                  "label": "Play 1"
+                },
+                {
+                  "v": "2",
+                  "label": "Play 2"
+                },
+                {
+                  "v": "3",
+                  "label": "Play 3"
+                },
+                {
+                  "v": "4",
+                  "label": "Play 4"
+                },
+                {
+                  "v": "5",
+                  "label": "Play 5"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ]
+    },
+    {
+      "name": "FRONT PANEL",
+      "commands": [
+        {
+          "code": "AF",
+          "name": "AF gain",
+          "set": "AG0{p1};",
+          "read": "AG0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Volume",
+              "type": "range",
+              "min": 0,
+              "max": 255,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "RF",
+          "name": "RF gain",
+          "set": "RG0{p1};",
+          "read": "RG0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 30,
+              "digits": 3
+            }
+          ],
+          "verified": true,
+          "note": "0 to 30, as the radio takes it; the CAT reference gives 000-100."
+        },
+        {
+          "code": "SQL",
+          "name": "Squelch",
+          "set": "SQ0{p1};",
+          "read": "SQ0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "MIC",
+          "name": "Microphone gain",
+          "set": "MG{p1};",
+          "read": "MG;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "PWR",
+          "name": "Transmit power",
+          "set": "PC{p1};",
+          "read": "PC;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 100,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "VOX-G",
+          "name": "VOX gain",
+          "set": "VG{p1};",
+          "read": "VG;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "VOX-D",
+          "name": "VOX delay",
+          "set": "VD{p1};",
+          "read": "VD;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 30,
+              "max": 3000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 10
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "CLAR",
+          "name": "Clarifier",
+          "set": "CF0{p1}0;",
+          "read": "CF0;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Clarifier",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "CLAR-CLR",
+          "name": "Clarifier clear",
+          "set": "RC;",
+          "verified": true
+        },
+        {
+          "code": "A=B",
+          "name": "VFO-A to VFO-B",
+          "set": "AB;",
+          "verified": true
+        },
+        {
+          "code": "B=A",
+          "name": "VFO-B to VFO-A",
+          "set": "BA;",
+          "verified": true
+        },
+        {
+          "code": "A/B",
+          "name": "Swap VFOs",
+          "set": "SV;",
+          "verified": true
+        },
+        {
+          "code": "LOCK",
+          "name": "Dial lock",
+          "set": "LK{p1};",
+          "read": "LK;",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Lock",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "panel"
+    },
+    {
+      "name": "READINGS",
+      "commands": [
+        {
+          "code": "IF",
+          "name": "Full status",
+          "read": "IF;",
+          "verified": true
+        },
+        {
+          "code": "ID",
+          "name": "Identification",
+          "read": "ID;",
+          "note": "Answers 0650 on an FT-891, as the CAT reference prints it. Hamlib expects 135 instead and keys its repeater-shift table on that value, so one of the two is wrong; a single ID; on the radio settles it.",
+          "verified": true
+        },
+        {
+          "code": "SM",
+          "name": "S-meter",
+          "read": "SM0;",
+          "verified": true
+        },
+        {
+          "code": "RM-SWR",
+          "name": "SWR",
+          "read": "RM6;",
+          "verified": true
+        },
+        {
+          "code": "RM-PO",
+          "name": "Power output",
+          "read": "RM5;",
+          "verified": true
+        },
+        {
+          "code": "RM-ALC",
+          "name": "ALC",
+          "read": "RM4;",
+          "verified": true
+        },
+        {
+          "code": "RM-COMP",
+          "name": "Compression",
+          "read": "RM3;",
+          "verified": true
+        },
+        {
+          "code": "RI-SWR",
+          "name": "High SWR flag",
+          "read": "RI0;",
+          "verified": true
+        },
+        {
+          "code": "UL",
+          "name": "PLL lock",
+          "read": "UL;",
+          "verified": true
+        }
+      ],
+      "poll": "meter",
+      "hidden": true
+    },
+    {
+      "name": "MENU — AGC",
+      "commands": [
+        {
+          "code": "EX0101",
+          "name": "01-01 AGC FAST DELAY",
+          "read": "EX0101;",
+          "set": "EX0101{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 20,
+              "max": 4000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 20
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0102",
+          "name": "01-02 AGC MID DELAY",
+          "read": "EX0102;",
+          "set": "EX0102{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 20,
+              "max": 4000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 20
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0103",
+          "name": "01-03 AGC SLOW DELAY",
+          "read": "EX0103;",
+          "set": "EX0103{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 20,
+              "max": 4000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 20
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — DISPLAY",
+      "commands": [
+        {
+          "code": "EX0201",
+          "name": "02-01 LCD CONTRAST",
+          "read": "EX0201;",
+          "set": "EX0201{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Contrast",
+              "type": "range",
+              "min": 1,
+              "max": 15,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0202",
+          "name": "02-02 DIMMER BACKLIT",
+          "read": "EX0202;",
+          "set": "EX0202{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 1,
+              "max": 15,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0203",
+          "name": "02-03 DIMMER LCD",
+          "read": "EX0203;",
+          "set": "EX0203{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 1,
+              "max": 15,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0204",
+          "name": "02-04 DIMMER TX/BUSY",
+          "read": "EX0204;",
+          "set": "EX0204{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 1,
+              "max": 15,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0205",
+          "name": "02-05 PEAK HOLD",
+          "read": "EX0205;",
+          "set": "EX0205{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "0.5 s"
+                },
+                {
+                  "v": "2",
+                  "label": "1.0 s"
+                },
+                {
+                  "v": "3",
+                  "label": "2.0 s"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0206",
+          "name": "02-06 ZIN LED",
+          "read": "EX0206;",
+          "set": "EX0206{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0207",
+          "name": "02-07 POP-UP MENU",
+          "read": "EX0207;",
+          "set": "EX0207{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "UPPER"
+                },
+                {
+                  "v": "1",
+                  "label": "LOWER"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — DVS",
+      "commands": [
+        {
+          "code": "EX0301",
+          "name": "03-01 DVS RX OUT LVL",
+          "read": "EX0301;",
+          "set": "EX0301{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0302",
+          "name": "03-02 DVS TX OUT LVL",
+          "read": "EX0302;",
+          "set": "EX0302{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — KEYER",
+      "commands": [
+        {
+          "code": "EX0401",
+          "name": "04-01 KEYER TYPE",
+          "read": "EX0401;",
+          "set": "EX0401{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "BUG"
+                },
+                {
+                  "v": "2",
+                  "label": "ELEKEY-A"
+                },
+                {
+                  "v": "3",
+                  "label": "ELEKEY-B"
+                },
+                {
+                  "v": "4",
+                  "label": "ELEKEY-Y"
+                },
+                {
+                  "v": "5",
+                  "label": "ACS"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0402",
+          "name": "04-02 KEYER DOT/DASH",
+          "read": "EX0402;",
+          "set": "EX0402{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "NOR"
+                },
+                {
+                  "v": "1",
+                  "label": "REV"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0403",
+          "name": "04-03 CW WEIGHT",
+          "read": "EX0403;",
+          "set": "EX0403{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Weight",
+              "type": "range",
+              "min": 25,
+              "max": 45,
+              "digits": 2,
+              "unit": "x0.1",
+              "display": {
+                "scale": 0.1,
+                "decimals": 1
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0404",
+          "name": "04-04 BEACON INTERVAL",
+          "read": "EX0404;",
+          "set": "EX0404{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Interval",
+              "type": "range",
+              "min": 0,
+              "max": 690,
+              "digits": 3,
+              "unit": "s",
+              "display": {
+                "unit": "s",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "note": "000 switches the beacon off. A non-zero value makes a played memory repeat.",
+          "verified": true
+        },
+        {
+          "code": "EX0405",
+          "name": "04-05 NUMBER STYLE",
+          "read": "EX0405;",
+          "set": "EX0405{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "1290"
+                },
+                {
+                  "v": "1",
+                  "label": "AUNO"
+                },
+                {
+                  "v": "2",
+                  "label": "AUNT"
+                },
+                {
+                  "v": "3",
+                  "label": "A2NO"
+                },
+                {
+                  "v": "4",
+                  "label": "A2NT"
+                },
+                {
+                  "v": "5",
+                  "label": "12NO"
+                },
+                {
+                  "v": "6",
+                  "label": "12NT"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0406",
+          "name": "04-06 CONTEST NUMBER",
+          "read": "EX0406;",
+          "set": "EX0406{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Number",
+              "type": "range",
+              "min": 0,
+              "max": 9999,
+              "digits": 4
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0407",
+          "name": "04-07 CW MEMORY 1",
+          "read": "EX0407;",
+          "set": "EX0407{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "TEXT"
+                },
+                {
+                  "v": "1",
+                  "label": "MESSAGE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0408",
+          "name": "04-08 CW MEMORY 2",
+          "read": "EX0408;",
+          "set": "EX0408{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "TEXT"
+                },
+                {
+                  "v": "1",
+                  "label": "MESSAGE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0409",
+          "name": "04-09 CW MEMORY 3",
+          "read": "EX0409;",
+          "set": "EX0409{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "TEXT"
+                },
+                {
+                  "v": "1",
+                  "label": "MESSAGE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0410",
+          "name": "04-10 CW MEMORY 4",
+          "read": "EX0410;",
+          "set": "EX0410{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "TEXT"
+                },
+                {
+                  "v": "1",
+                  "label": "MESSAGE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0411",
+          "name": "04-11 CW MEMORY 5",
+          "read": "EX0411;",
+          "set": "EX0411{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "TEXT"
+                },
+                {
+                  "v": "1",
+                  "label": "MESSAGE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — GENERAL",
+      "commands": [
+        {
+          "code": "EX0501",
+          "name": "05-01 NB WIDTH",
+          "read": "EX0501;",
+          "set": "EX0501{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "1 ms"
+                },
+                {
+                  "v": "1",
+                  "label": "3 ms"
+                },
+                {
+                  "v": "2",
+                  "label": "10 ms"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0502",
+          "name": "05-02 NB REJECTION",
+          "read": "EX0502;",
+          "set": "EX0502{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "10 dB"
+                },
+                {
+                  "v": "1",
+                  "label": "30 dB"
+                },
+                {
+                  "v": "2",
+                  "label": "50 dB"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0503",
+          "name": "05-03 NB LEVEL",
+          "read": "EX0503;",
+          "set": "EX0503{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0504",
+          "name": "05-04 BEEP LEVEL",
+          "read": "EX0504;",
+          "set": "EX0504{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0505",
+          "name": "05-05 RF/SQL VR",
+          "read": "EX0505;",
+          "set": "EX0505{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "RF"
+                },
+                {
+                  "v": "1",
+                  "label": "SQL"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0506",
+          "name": "05-06 CAT RATE",
+          "read": "EX0506;",
+          "set": "EX0506{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "4800"
+                },
+                {
+                  "v": "1",
+                  "label": "9600"
+                },
+                {
+                  "v": "2",
+                  "label": "19200"
+                },
+                {
+                  "v": "3",
+                  "label": "38400"
+                }
+              ]
+            }
+          ],
+          "note": "Changing this breaks the link until the server is set to match.",
+          "verified": true,
+          "confirm": "Change the CAT rate? The link stops until the server is set to the same speed."
+        },
+        {
+          "code": "EX0507",
+          "name": "05-07 CAT TOT",
+          "read": "EX0507;",
+          "set": "EX0507{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "10 ms"
+                },
+                {
+                  "v": "1",
+                  "label": "100 ms"
+                },
+                {
+                  "v": "2",
+                  "label": "1000 ms"
+                },
+                {
+                  "v": "3",
+                  "label": "3000 ms"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0508",
+          "name": "05-08 CAT RTS",
+          "read": "EX0508;",
+          "set": "EX0508{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0509",
+          "name": "05-09 MEM GROUP",
+          "read": "EX0509;",
+          "set": "EX0509{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0510",
+          "name": "05-10 FM SETTING",
+          "read": "EX0510;",
+          "set": "EX0510{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0511",
+          "name": "05-11 REC SETTING",
+          "read": "EX0511;",
+          "set": "EX0511{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0512",
+          "name": "05-12 ATAS SETTING",
+          "read": "EX0512;",
+          "set": "EX0512{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0513",
+          "name": "05-13 QUICK SPL FREQ",
+          "read": "EX0513;",
+          "set": "EX0513{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Offset",
+              "type": "range",
+              "min": -20,
+              "max": 20,
+              "digits": 3,
+              "unit": "kHz",
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0514",
+          "name": "05-14 TX TOT",
+          "read": "EX0514;",
+          "set": "EX0514{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Timeout",
+              "type": "range",
+              "min": 0,
+              "max": 30,
+              "digits": 2,
+              "unit": "min, 00=OFF",
+              "display": {
+                "unit": "min",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0515",
+          "name": "05-15 MIC SCAN",
+          "read": "EX0515;",
+          "set": "EX0515{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0516",
+          "name": "05-16 MIC SCAN RESUME",
+          "read": "EX0516;",
+          "set": "EX0516{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "PAUSE"
+                },
+                {
+                  "v": "1",
+                  "label": "TIME"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0517",
+          "name": "05-17 REF FREQ ADJ",
+          "read": "EX0517;",
+          "set": "EX0517{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Adjust",
+              "type": "range",
+              "min": -25,
+              "max": 25,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0518",
+          "name": "05-18 CLAR SELECT",
+          "read": "EX0518;",
+          "set": "EX0518{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "RX"
+                },
+                {
+                  "v": "1",
+                  "label": "TX"
+                },
+                {
+                  "v": "2",
+                  "label": "TRX"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0519",
+          "name": "05-19 APO",
+          "read": "EX0519;",
+          "set": "EX0519{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "1 h"
+                },
+                {
+                  "v": "2",
+                  "label": "2 h"
+                },
+                {
+                  "v": "3",
+                  "label": "4 h"
+                },
+                {
+                  "v": "4",
+                  "label": "6 h"
+                },
+                {
+                  "v": "5",
+                  "label": "8 h"
+                },
+                {
+                  "v": "6",
+                  "label": "10 h"
+                },
+                {
+                  "v": "7",
+                  "label": "12 h"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0520",
+          "name": "05-20 FAN CONTROL",
+          "read": "EX0520;",
+          "set": "EX0520{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "NORMAL"
+                },
+                {
+                  "v": "1",
+                  "label": "CONTEST"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — MODE AM",
+      "commands": [
+        {
+          "code": "EX0601",
+          "name": "06-01 AM LCUT FREQ",
+          "read": "EX0601;",
+          "set": "EX0601{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 19,
+              "digits": 2,
+              "unit": "00=OFF, 01=100 Hz, 50 Hz steps",
+              "display": {
+                "offset": 50,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0602",
+          "name": "06-02 AM LCUT SLOPE",
+          "read": "EX0602;",
+          "set": "EX0602{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0603",
+          "name": "06-03 AM HCUT FREQ",
+          "read": "EX0603;",
+          "set": "EX0603{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 67,
+              "digits": 2,
+              "unit": "00=OFF, 01=700 Hz, 50 Hz steps",
+              "display": {
+                "offset": 650,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0604",
+          "name": "06-04 AM HCUT SLOPE",
+          "read": "EX0604;",
+          "set": "EX0604{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0605",
+          "name": "06-05 AM MIC SELECT",
+          "read": "EX0605;",
+          "set": "EX0605{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "MIC"
+                },
+                {
+                  "v": "1",
+                  "label": "REAR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0606",
+          "name": "06-06 AM OUT LEVEL",
+          "read": "EX0606;",
+          "set": "EX0606{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0607",
+          "name": "06-07 AM PTT SELECT",
+          "read": "EX0607;",
+          "set": "EX0607{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DAKY"
+                },
+                {
+                  "v": "1",
+                  "label": "RTS"
+                },
+                {
+                  "v": "2",
+                  "label": "DTR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — MODE CW",
+      "commands": [
+        {
+          "code": "EX0701",
+          "name": "07-01 CW LCUT FREQ",
+          "read": "EX0701;",
+          "set": "EX0701{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 19,
+              "digits": 2,
+              "unit": "00=OFF, 01=100 Hz, 50 Hz steps",
+              "display": {
+                "offset": 50,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0702",
+          "name": "07-02 CW LCUT SLOPE",
+          "read": "EX0702;",
+          "set": "EX0702{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0703",
+          "name": "07-03 CW HCUT FREQ",
+          "read": "EX0703;",
+          "set": "EX0703{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 67,
+              "digits": 2,
+              "unit": "00=OFF, 01=700 Hz, 50 Hz steps",
+              "display": {
+                "offset": 650,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0704",
+          "name": "07-04 CW HCUT SLOPE",
+          "read": "EX0704;",
+          "set": "EX0704{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0705",
+          "name": "07-05 CW OUT LEVEL",
+          "read": "EX0705;",
+          "set": "EX0705{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0706",
+          "name": "07-06 CW AUTO MODE",
+          "read": "EX0706;",
+          "set": "EX0706{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "50M"
+                },
+                {
+                  "v": "2",
+                  "label": "ON"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0707",
+          "name": "07-07 CW BFO",
+          "read": "EX0707;",
+          "set": "EX0707{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "USB"
+                },
+                {
+                  "v": "1",
+                  "label": "LSB"
+                },
+                {
+                  "v": "2",
+                  "label": "AUTO"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0708",
+          "name": "07-08 CW BK-IN TYPE",
+          "read": "EX0708;",
+          "set": "EX0708{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "SEMI"
+                },
+                {
+                  "v": "1",
+                  "label": "FULL"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0709",
+          "name": "07-09 CW BK-IN DELAY",
+          "read": "EX0709;",
+          "set": "EX0709{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 30,
+              "max": 3000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 10
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0710",
+          "name": "07-10 CW WAVE SHAPE",
+          "read": "EX0710;",
+          "set": "EX0710{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "1",
+                  "label": "2 ms"
+                },
+                {
+                  "v": "2",
+                  "label": "4 ms"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0711",
+          "name": "07-11 CW FREQ DISPLAY",
+          "read": "EX0711;",
+          "set": "EX0711{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "FREQ"
+                },
+                {
+                  "v": "1",
+                  "label": "PITCH"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0712",
+          "name": "07-12 PC KEYING",
+          "read": "EX0712;",
+          "set": "EX0712{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "DAKY"
+                },
+                {
+                  "v": "2",
+                  "label": "RTS"
+                },
+                {
+                  "v": "3",
+                  "label": "DTR"
+                }
+              ]
+            }
+          ],
+          "note": "Selects the line that keys CW from the computer.",
+          "verified": true
+        },
+        {
+          "code": "EX0713",
+          "name": "07-13 QSK DELAY TIME",
+          "read": "EX0713;",
+          "set": "EX0713{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "15 ms"
+                },
+                {
+                  "v": "1",
+                  "label": "20 ms"
+                },
+                {
+                  "v": "2",
+                  "label": "25 ms"
+                },
+                {
+                  "v": "3",
+                  "label": "30 ms"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — MODE DAT",
+      "commands": [
+        {
+          "code": "EX0801",
+          "name": "08-01 DATA MODE",
+          "read": "EX0801;",
+          "set": "EX0801{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "PSK"
+                },
+                {
+                  "v": "1",
+                  "label": "OTHERS"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0802",
+          "name": "08-02 PSK TONE",
+          "read": "EX0802;",
+          "set": "EX0802{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "1000 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "1500 Hz"
+                },
+                {
+                  "v": "2",
+                  "label": "2000 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0803",
+          "name": "08-03 OTHER DISP",
+          "read": "EX0803;",
+          "set": "EX0803{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Offset",
+              "type": "range",
+              "min": -3000,
+              "max": 3000,
+              "digits": 5,
+              "unit": "Hz",
+              "step": 10,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0804",
+          "name": "08-04 OTHER SHIFT",
+          "read": "EX0804;",
+          "set": "EX0804{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Shift",
+              "type": "range",
+              "min": -3000,
+              "max": 3000,
+              "digits": 5,
+              "unit": "Hz",
+              "step": 10,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0805",
+          "name": "08-05 DATA LCUT FREQ",
+          "read": "EX0805;",
+          "set": "EX0805{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 19,
+              "digits": 2,
+              "unit": "00=OFF, 01=100 Hz, 50 Hz steps",
+              "display": {
+                "offset": 50,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0806",
+          "name": "08-06 DATA LCUT SLOPE",
+          "read": "EX0806;",
+          "set": "EX0806{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0807",
+          "name": "08-07 DATA HCUT FREQ",
+          "read": "EX0807;",
+          "set": "EX0807{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 67,
+              "digits": 2,
+              "unit": "00=OFF, 01=700 Hz, 50 Hz steps",
+              "display": {
+                "offset": 650,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0808",
+          "name": "08-08 DATA HCUT SLOPE",
+          "read": "EX0808;",
+          "set": "EX0808{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0809",
+          "name": "08-09 DATA IN SELECT",
+          "read": "EX0809;",
+          "set": "EX0809{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "MIC"
+                },
+                {
+                  "v": "1",
+                  "label": "REAR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0810",
+          "name": "08-10 DATA PTT SELECT",
+          "read": "EX0810;",
+          "set": "EX0810{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DAKY"
+                },
+                {
+                  "v": "1",
+                  "label": "RTS"
+                },
+                {
+                  "v": "2",
+                  "label": "DTR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0811",
+          "name": "08-11 DATA OUT LEVEL",
+          "read": "EX0811;",
+          "set": "EX0811{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0812",
+          "name": "08-12 DATA BFO",
+          "read": "EX0812;",
+          "set": "EX0812{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "USB"
+                },
+                {
+                  "v": "1",
+                  "label": "LSB"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — MODE FM",
+      "commands": [
+        {
+          "code": "EX0901",
+          "name": "09-01 FM MIC SELECT",
+          "read": "EX0901;",
+          "set": "EX0901{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "MIC"
+                },
+                {
+                  "v": "1",
+                  "label": "REAR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0902",
+          "name": "09-02 FM OUT LEVEL",
+          "read": "EX0902;",
+          "set": "EX0902{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0903",
+          "name": "09-03 PKT PTT SELECT",
+          "read": "EX0903;",
+          "set": "EX0903{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DAKY"
+                },
+                {
+                  "v": "1",
+                  "label": "RTS"
+                },
+                {
+                  "v": "2",
+                  "label": "DTR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0904",
+          "name": "09-04 RPT SHIFT 28MHz",
+          "read": "EX0904;",
+          "set": "EX0904{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Shift",
+              "type": "range",
+              "min": 0,
+              "max": 1000,
+              "digits": 4,
+              "unit": "kHz",
+              "step": 10
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX0905",
+          "name": "09-05 RPT SHIFT 50MHz",
+          "read": "EX0905;",
+          "set": "EX0905{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Shift",
+              "type": "range",
+              "min": 0,
+              "max": 4000,
+              "digits": 4,
+              "unit": "kHz",
+              "step": 10
+            }
+          ],
+          "note": "The manual's table says one digit here; four is what the range needs, and what the 28 MHz entry uses.",
+          "verified": true
+        },
+        {
+          "code": "EX0906",
+          "name": "09-06 DCS POLARITY",
+          "read": "EX0906;",
+          "set": "EX0906{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "Tn-Rn"
+                },
+                {
+                  "v": "1",
+                  "label": "Tn-Riv"
+                },
+                {
+                  "v": "2",
+                  "label": "Tiv-Rn"
+                },
+                {
+                  "v": "3",
+                  "label": "Tiv-Riv"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — MODE RTY",
+      "commands": [
+        {
+          "code": "EX1001",
+          "name": "10-01 RTTY LCUT FREQ",
+          "read": "EX1001;",
+          "set": "EX1001{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 19,
+              "digits": 2,
+              "unit": "00=OFF, 01=100 Hz, 50 Hz steps",
+              "display": {
+                "offset": 50,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1002",
+          "name": "10-02 RTTY LCUT SLOPE",
+          "read": "EX1002;",
+          "set": "EX1002{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1003",
+          "name": "10-03 RTTY HCUT FREQ",
+          "read": "EX1003;",
+          "set": "EX1003{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 67,
+              "digits": 2,
+              "unit": "00=OFF, 01=700 Hz, 50 Hz steps",
+              "display": {
+                "offset": 650,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1004",
+          "name": "10-04 RTTY HCUT SLOPE",
+          "read": "EX1004;",
+          "set": "EX1004{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1005",
+          "name": "10-05 RTTY SHIFT PORT",
+          "read": "EX1005;",
+          "set": "EX1005{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "SHIFT"
+                },
+                {
+                  "v": "1",
+                  "label": "DTR"
+                },
+                {
+                  "v": "2",
+                  "label": "RTS"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1006",
+          "name": "10-06 RTTY POLARITY-R",
+          "read": "EX1006;",
+          "set": "EX1006{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "NOR"
+                },
+                {
+                  "v": "1",
+                  "label": "REV"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1007",
+          "name": "10-07 RTTY POLARITY-T",
+          "read": "EX1007;",
+          "set": "EX1007{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "NOR"
+                },
+                {
+                  "v": "1",
+                  "label": "REV"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1008",
+          "name": "10-08 RTTY OUT LEVEL",
+          "read": "EX1008;",
+          "set": "EX1008{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1009",
+          "name": "10-09 RTTY SHIFT FREQ",
+          "read": "EX1009;",
+          "set": "EX1009{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "170 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "200 Hz"
+                },
+                {
+                  "v": "2",
+                  "label": "425 Hz"
+                },
+                {
+                  "v": "3",
+                  "label": "850 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1010",
+          "name": "10-10 RTTY MARK FREQ",
+          "read": "EX1010;",
+          "set": "EX1010{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "1275 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "2125 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1011",
+          "name": "10-11 RTTY BFO",
+          "read": "EX1011;",
+          "set": "EX1011{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "USB"
+                },
+                {
+                  "v": "1",
+                  "label": "LSB"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — MODE SSB",
+      "commands": [
+        {
+          "code": "EX1101",
+          "name": "11-01 SSB LCUT FREQ",
+          "read": "EX1101;",
+          "set": "EX1101{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 19,
+              "digits": 2,
+              "unit": "00=OFF, 01=100 Hz, 50 Hz steps",
+              "display": {
+                "offset": 50,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1102",
+          "name": "11-02 SSB LCUT SLOPE",
+          "read": "EX1102;",
+          "set": "EX1102{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1103",
+          "name": "11-03 SSB HCUT FREQ",
+          "read": "EX1103;",
+          "set": "EX1103{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Cut",
+              "type": "range",
+              "min": 0,
+              "max": 67,
+              "digits": 2,
+              "unit": "00=OFF, 01=700 Hz, 50 Hz steps",
+              "display": {
+                "offset": 650,
+                "scale": 50,
+                "unit": "Hz",
+                "zero": "OFF"
+              }
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1104",
+          "name": "11-04 SSB HCUT SLOPE",
+          "read": "EX1104;",
+          "set": "EX1104{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "6 dB/oct"
+                },
+                {
+                  "v": "1",
+                  "label": "18 dB/oct"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1105",
+          "name": "11-05 SSB MIC SELECT",
+          "read": "EX1105;",
+          "set": "EX1105{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "MIC"
+                },
+                {
+                  "v": "1",
+                  "label": "REAR"
+                }
+              ]
+            }
+          ],
+          "note": "REAR feeds the rig from the rear socket and mutes the front microphone.",
+          "verified": true
+        },
+        {
+          "code": "EX1106",
+          "name": "11-06 SSB OUT LEVEL",
+          "read": "EX1106;",
+          "set": "EX1106{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1107",
+          "name": "11-07 SSB BFO",
+          "read": "EX1107;",
+          "set": "EX1107{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "USB"
+                },
+                {
+                  "v": "1",
+                  "label": "LSB"
+                },
+                {
+                  "v": "2",
+                  "label": "AUTO"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1108",
+          "name": "11-08 SSB PTT SELECT",
+          "read": "EX1108;",
+          "set": "EX1108{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DAKY"
+                },
+                {
+                  "v": "1",
+                  "label": "RTS"
+                },
+                {
+                  "v": "2",
+                  "label": "DTR"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1109",
+          "name": "11-09 SSB TX BPF",
+          "read": "EX1109;",
+          "set": "EX1109{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "100-3000"
+                },
+                {
+                  "v": "1",
+                  "label": "100-2900"
+                },
+                {
+                  "v": "2",
+                  "label": "200-2800"
+                },
+                {
+                  "v": "3",
+                  "label": "300-2700"
+                },
+                {
+                  "v": "4",
+                  "label": "400-2600"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — RX DSP",
+      "commands": [
+        {
+          "code": "EX1201",
+          "name": "12-01 APF WIDTH",
+          "read": "EX1201;",
+          "set": "EX1201{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "NARROW"
+                },
+                {
+                  "v": "1",
+                  "label": "MEDIUM"
+                },
+                {
+                  "v": "2",
+                  "label": "WIDE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1202",
+          "name": "12-02 CONTOUR LEVEL",
+          "read": "EX1202;",
+          "set": "EX1202{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -40,
+              "max": 20,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1203",
+          "name": "12-03 CONTOUR WIDTH",
+          "read": "EX1203;",
+          "set": "EX1203{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Width",
+              "type": "range",
+              "min": 1,
+              "max": 11,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1204",
+          "name": "12-04 IF NOTCH WIDTH",
+          "read": "EX1204;",
+          "set": "EX1204{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "NARROW"
+                },
+                {
+                  "v": "1",
+                  "label": "WIDE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — SCOPE",
+      "commands": [
+        {
+          "code": "EX1301",
+          "name": "13-01 SCP START CYCLE",
+          "read": "EX1301;",
+          "set": "EX1301{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "3 s"
+                },
+                {
+                  "v": "2",
+                  "label": "5 s"
+                },
+                {
+                  "v": "3",
+                  "label": "10 s"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1302",
+          "name": "13-02 SCP SPAN FREQ",
+          "read": "EX1302;",
+          "set": "EX1302{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "37.5 kHz"
+                },
+                {
+                  "v": "1",
+                  "label": "75 kHz"
+                },
+                {
+                  "v": "2",
+                  "label": "150 kHz"
+                },
+                {
+                  "v": "3",
+                  "label": "375 kHz"
+                },
+                {
+                  "v": "4",
+                  "label": "750 kHz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — TUNING",
+      "commands": [
+        {
+          "code": "EX1401",
+          "name": "14-01 QUICK DIAL",
+          "read": "EX1401;",
+          "set": "EX1401{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "50 kHz"
+                },
+                {
+                  "v": "1",
+                  "label": "100 kHz"
+                },
+                {
+                  "v": "2",
+                  "label": "500 kHz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1402",
+          "name": "14-02 SSB DIAL STEP",
+          "read": "EX1402;",
+          "set": "EX1402{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "2 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "5 Hz"
+                },
+                {
+                  "v": "2",
+                  "label": "10 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1403",
+          "name": "14-03 AM DIAL STEP",
+          "read": "EX1403;",
+          "set": "EX1403{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "10 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "100 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1404",
+          "name": "14-04 FM DIAL STEP",
+          "read": "EX1404;",
+          "set": "EX1404{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "10 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "100 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1405",
+          "name": "14-05 DIAL STEP",
+          "read": "EX1405;",
+          "set": "EX1405{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "2 Hz"
+                },
+                {
+                  "v": "1",
+                  "label": "5 Hz"
+                },
+                {
+                  "v": "2",
+                  "label": "10 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1406",
+          "name": "14-06 AM CH STEP",
+          "read": "EX1406;",
+          "set": "EX1406{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "2.5 kHz"
+                },
+                {
+                  "v": "1",
+                  "label": "5 kHz"
+                },
+                {
+                  "v": "2",
+                  "label": "9 kHz"
+                },
+                {
+                  "v": "3",
+                  "label": "10 kHz"
+                },
+                {
+                  "v": "4",
+                  "label": "12.5 kHz"
+                },
+                {
+                  "v": "5",
+                  "label": "25 kHz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1407",
+          "name": "14-07 FM CH STEP",
+          "read": "EX1407;",
+          "set": "EX1407{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "5 kHz"
+                },
+                {
+                  "v": "1",
+                  "label": "6.25 kHz"
+                },
+                {
+                  "v": "2",
+                  "label": "10 kHz"
+                },
+                {
+                  "v": "3",
+                  "label": "12.5 kHz"
+                },
+                {
+                  "v": "4",
+                  "label": "15 kHz"
+                },
+                {
+                  "v": "5",
+                  "label": "20 kHz"
+                },
+                {
+                  "v": "6",
+                  "label": "25 kHz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — TX AUDIO",
+      "commands": [
+        {
+          "code": "EX1501",
+          "name": "15-01 EQ1 FREQ",
+          "read": "EX1501;",
+          "set": "EX1501{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "OFF"
+                },
+                {
+                  "v": "01",
+                  "label": "100 Hz"
+                },
+                {
+                  "v": "02",
+                  "label": "200 Hz"
+                },
+                {
+                  "v": "03",
+                  "label": "300 Hz"
+                },
+                {
+                  "v": "04",
+                  "label": "400 Hz"
+                },
+                {
+                  "v": "05",
+                  "label": "500 Hz"
+                },
+                {
+                  "v": "06",
+                  "label": "600 Hz"
+                },
+                {
+                  "v": "07",
+                  "label": "700 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1502",
+          "name": "15-02 EQ1 LEVEL",
+          "read": "EX1502;",
+          "set": "EX1502{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -20,
+              "max": 10,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1503",
+          "name": "15-03 EQ1 BWTH",
+          "read": "EX1503;",
+          "set": "EX1503{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Bandwidth",
+              "type": "range",
+              "min": 1,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1504",
+          "name": "15-04 EQ2 FREQ",
+          "read": "EX1504;",
+          "set": "EX1504{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "OFF"
+                },
+                {
+                  "v": "01",
+                  "label": "700 Hz"
+                },
+                {
+                  "v": "02",
+                  "label": "800 Hz"
+                },
+                {
+                  "v": "03",
+                  "label": "900 Hz"
+                },
+                {
+                  "v": "04",
+                  "label": "1000 Hz"
+                },
+                {
+                  "v": "05",
+                  "label": "1100 Hz"
+                },
+                {
+                  "v": "06",
+                  "label": "1200 Hz"
+                },
+                {
+                  "v": "07",
+                  "label": "1300 Hz"
+                },
+                {
+                  "v": "08",
+                  "label": "1400 Hz"
+                },
+                {
+                  "v": "09",
+                  "label": "1500 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1505",
+          "name": "15-05 EQ2 LEVEL",
+          "read": "EX1505;",
+          "set": "EX1505{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -20,
+              "max": 10,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1506",
+          "name": "15-06 EQ2 BWTH",
+          "read": "EX1506;",
+          "set": "EX1506{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Bandwidth",
+              "type": "range",
+              "min": 1,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1507",
+          "name": "15-07 EQ3 FREQ",
+          "read": "EX1507;",
+          "set": "EX1507{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "OFF"
+                },
+                {
+                  "v": "01",
+                  "label": "1500 Hz"
+                },
+                {
+                  "v": "02",
+                  "label": "1600 Hz"
+                },
+                {
+                  "v": "03",
+                  "label": "1700 Hz"
+                },
+                {
+                  "v": "04",
+                  "label": "1800 Hz"
+                },
+                {
+                  "v": "05",
+                  "label": "1900 Hz"
+                },
+                {
+                  "v": "06",
+                  "label": "2000 Hz"
+                },
+                {
+                  "v": "07",
+                  "label": "2100 Hz"
+                },
+                {
+                  "v": "08",
+                  "label": "2200 Hz"
+                },
+                {
+                  "v": "09",
+                  "label": "2300 Hz"
+                },
+                {
+                  "v": "10",
+                  "label": "2400 Hz"
+                },
+                {
+                  "v": "11",
+                  "label": "2500 Hz"
+                },
+                {
+                  "v": "12",
+                  "label": "2600 Hz"
+                },
+                {
+                  "v": "13",
+                  "label": "2700 Hz"
+                },
+                {
+                  "v": "14",
+                  "label": "2800 Hz"
+                },
+                {
+                  "v": "15",
+                  "label": "2900 Hz"
+                },
+                {
+                  "v": "16",
+                  "label": "3000 Hz"
+                },
+                {
+                  "v": "17",
+                  "label": "3100 Hz"
+                },
+                {
+                  "v": "18",
+                  "label": "3200 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1508",
+          "name": "15-08 EQ3 LEVEL",
+          "read": "EX1508;",
+          "set": "EX1508{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -20,
+              "max": 10,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1509",
+          "name": "15-09 EQ3 BWTH",
+          "read": "EX1509;",
+          "set": "EX1509{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Bandwidth",
+              "type": "range",
+              "min": 1,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1510",
+          "name": "15-10 P-EQ1 FREQ",
+          "read": "EX1510;",
+          "set": "EX1510{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "OFF"
+                },
+                {
+                  "v": "01",
+                  "label": "100 Hz"
+                },
+                {
+                  "v": "02",
+                  "label": "200 Hz"
+                },
+                {
+                  "v": "03",
+                  "label": "300 Hz"
+                },
+                {
+                  "v": "04",
+                  "label": "400 Hz"
+                },
+                {
+                  "v": "05",
+                  "label": "500 Hz"
+                },
+                {
+                  "v": "06",
+                  "label": "600 Hz"
+                },
+                {
+                  "v": "07",
+                  "label": "700 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1511",
+          "name": "15-11 P-EQ1 LEVEL",
+          "read": "EX1511;",
+          "set": "EX1511{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -20,
+              "max": 10,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1512",
+          "name": "15-12 P-EQ1 BWTH",
+          "read": "EX1512;",
+          "set": "EX1512{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Bandwidth",
+              "type": "range",
+              "min": 1,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1513",
+          "name": "15-13 P-EQ2 FREQ",
+          "read": "EX1513;",
+          "set": "EX1513{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "OFF"
+                },
+                {
+                  "v": "01",
+                  "label": "700 Hz"
+                },
+                {
+                  "v": "02",
+                  "label": "800 Hz"
+                },
+                {
+                  "v": "03",
+                  "label": "900 Hz"
+                },
+                {
+                  "v": "04",
+                  "label": "1000 Hz"
+                },
+                {
+                  "v": "05",
+                  "label": "1100 Hz"
+                },
+                {
+                  "v": "06",
+                  "label": "1200 Hz"
+                },
+                {
+                  "v": "07",
+                  "label": "1300 Hz"
+                },
+                {
+                  "v": "08",
+                  "label": "1400 Hz"
+                },
+                {
+                  "v": "09",
+                  "label": "1500 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1514",
+          "name": "15-14 P-EQ2 LEVEL",
+          "read": "EX1514;",
+          "set": "EX1514{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -20,
+              "max": 10,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1515",
+          "name": "15-15 P-EQ2 BWTH",
+          "read": "EX1515;",
+          "set": "EX1515{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Bandwidth",
+              "type": "range",
+              "min": 1,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1516",
+          "name": "15-16 P-EQ3 FREQ",
+          "read": "EX1516;",
+          "set": "EX1516{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "00",
+                  "label": "OFF"
+                },
+                {
+                  "v": "01",
+                  "label": "1500 Hz"
+                },
+                {
+                  "v": "02",
+                  "label": "1600 Hz"
+                },
+                {
+                  "v": "03",
+                  "label": "1700 Hz"
+                },
+                {
+                  "v": "04",
+                  "label": "1800 Hz"
+                },
+                {
+                  "v": "05",
+                  "label": "1900 Hz"
+                },
+                {
+                  "v": "06",
+                  "label": "2000 Hz"
+                },
+                {
+                  "v": "07",
+                  "label": "2100 Hz"
+                },
+                {
+                  "v": "08",
+                  "label": "2200 Hz"
+                },
+                {
+                  "v": "09",
+                  "label": "2300 Hz"
+                },
+                {
+                  "v": "10",
+                  "label": "2400 Hz"
+                },
+                {
+                  "v": "11",
+                  "label": "2500 Hz"
+                },
+                {
+                  "v": "12",
+                  "label": "2600 Hz"
+                },
+                {
+                  "v": "13",
+                  "label": "2700 Hz"
+                },
+                {
+                  "v": "14",
+                  "label": "2800 Hz"
+                },
+                {
+                  "v": "15",
+                  "label": "2900 Hz"
+                },
+                {
+                  "v": "16",
+                  "label": "3000 Hz"
+                },
+                {
+                  "v": "17",
+                  "label": "3100 Hz"
+                },
+                {
+                  "v": "18",
+                  "label": "3200 Hz"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1517",
+          "name": "15-17 P-EQ3 LEVEL",
+          "read": "EX1517;",
+          "set": "EX1517{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Level",
+              "type": "range",
+              "min": -20,
+              "max": 10,
+              "digits": 3,
+              "signed": true
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1518",
+          "name": "15-18 P-EQ3 BWTH",
+          "read": "EX1518;",
+          "set": "EX1518{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Bandwidth",
+              "type": "range",
+              "min": 1,
+              "max": 10,
+              "digits": 2
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — TX GNRL",
+      "commands": [
+        {
+          "code": "EX1601",
+          "name": "16-01 HF SSB PWR",
+          "read": "EX1601;",
+          "set": "EX1601{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 100,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1602",
+          "name": "16-02 HF AM PWR",
+          "read": "EX1602;",
+          "set": "EX1602{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 40,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1603",
+          "name": "16-03 HF PWR",
+          "read": "EX1603;",
+          "set": "EX1603{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 100,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1604",
+          "name": "16-04 50M SSB PWR",
+          "read": "EX1604;",
+          "set": "EX1604{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 100,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1605",
+          "name": "16-05 50M AM PWR",
+          "read": "EX1605;",
+          "set": "EX1605{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 40,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1606",
+          "name": "16-06 50M PWR",
+          "read": "EX1606;",
+          "set": "EX1606{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Power",
+              "type": "range",
+              "min": 5,
+              "max": 100,
+              "digits": 3,
+              "unit": "W"
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1607",
+          "name": "16-07 SSB MIC GAIN",
+          "read": "EX1607;",
+          "set": "EX1607{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1608",
+          "name": "16-08 AM MIC GAIN",
+          "read": "EX1608;",
+          "set": "EX1608{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1609",
+          "name": "16-09 FM MIC GAIN",
+          "read": "EX1609;",
+          "set": "EX1609{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1610",
+          "name": "16-10 DATA MIC GAIN",
+          "read": "EX1610;",
+          "set": "EX1610{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1611",
+          "name": "16-11 SSB DATA GAIN",
+          "read": "EX1611;",
+          "set": "EX1611{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1612",
+          "name": "16-12 AM DATA GAIN",
+          "read": "EX1612;",
+          "set": "EX1612{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1613",
+          "name": "16-13 FM DATA GAIN",
+          "read": "EX1613;",
+          "set": "EX1613{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1614",
+          "name": "16-14 DATA DATA GAIN",
+          "read": "EX1614;",
+          "set": "EX1614{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1615",
+          "name": "16-15 TUNER SELECT",
+          "read": "EX1615;",
+          "set": "EX1615{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "OFF"
+                },
+                {
+                  "v": "1",
+                  "label": "EXTERNAL"
+                },
+                {
+                  "v": "2",
+                  "label": "ATAS"
+                },
+                {
+                  "v": "3",
+                  "label": "LAMP"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1616",
+          "name": "16-16 VOX SELECT",
+          "read": "EX1616;",
+          "set": "EX1616{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "MIC"
+                },
+                {
+                  "v": "1",
+                  "label": "DATA"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1617",
+          "name": "16-17 VOX GAIN",
+          "read": "EX1617;",
+          "set": "EX1617{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1618",
+          "name": "16-18 VOX DELAY",
+          "read": "EX1618;",
+          "set": "EX1618{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 30,
+              "max": 3000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 10
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1619",
+          "name": "16-19 ANTI VOX GAIN",
+          "read": "EX1619;",
+          "set": "EX1619{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1620",
+          "name": "16-20 DATA VOX GAIN",
+          "read": "EX1620;",
+          "set": "EX1620{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1621",
+          "name": "16-21 DATA VOX DELAY",
+          "read": "EX1621;",
+          "set": "EX1621{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Delay",
+              "type": "range",
+              "min": 30,
+              "max": 3000,
+              "digits": 4,
+              "unit": "ms",
+              "step": 10
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1622",
+          "name": "16-22 ANTI DVOX GAIN",
+          "read": "EX1622;",
+          "set": "EX1622{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Gain",
+              "type": "range",
+              "min": 0,
+              "max": 100,
+              "digits": 3
+            }
+          ],
+          "verified": true
+        },
+        {
+          "code": "EX1623",
+          "name": "16-23 EMERGENCY FREQ",
+          "read": "EX1623;",
+          "set": "EX1623{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "DISABLE"
+                },
+                {
+                  "v": "1",
+                  "label": "ENABLE"
+                }
+              ]
+            }
+          ],
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — RESET",
+      "commands": [
+        {
+          "code": "EX1701",
+          "name": "17-01 RESET",
+          "set": "EX1701{p1};",
+          "params": [
+            {
+              "id": "p1",
+              "name": "Value",
+              "type": "enum",
+              "values": [
+                {
+                  "v": "0",
+                  "label": "ALL"
+                },
+                {
+                  "v": "1",
+                  "label": "DATA"
+                },
+                {
+                  "v": "2",
+                  "label": "FUNC"
+                }
+              ]
+            }
+          ],
+          "note": "Resets the radio. There is no confirmation and no undo. It is an action, not a setting: the radio has nothing to answer when asked, so it is left out of the bulk read.",
+          "verified": true,
+          "confirm": "Reset the radio? There is no undo."
+        }
+      ],
+      "poll": "menu"
+    },
+    {
+      "name": "MENU — VERSION",
+      "commands": [
+        {
+          "code": "EX1801",
+          "name": "18-01 MAIN VERSION",
+          "read": "EX1801;",
+          "verified": true
+        },
+        {
+          "code": "EX1802",
+          "name": "18-02 DSP VERSION",
+          "read": "EX1802;",
+          "verified": true
+        },
+        {
+          "code": "EX1803",
+          "name": "18-03 LCD VERSION",
+          "read": "EX1803;",
+          "verified": true
+        }
+      ],
+      "poll": "menu"
+    }
+  ]
+}

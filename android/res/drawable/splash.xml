@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash screen: plain background, logo centred. Qt shows it while the
+     native library loads, before the QML engine draws its first frame. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/splash_background"/>
+    <item>
+        <bitmap android:src="@drawable/splash_logo"
+                android:gravity="center"/>
+    </item>
+</layer-list>

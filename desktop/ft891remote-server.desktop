@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=FT891Remote Server
+GenericName=Remote station server
+Comment=Share a Yaesu FT-891 over the network: audio, PTT and CAT control
+Exec=@BINDIR@/ft891remote-server
+Icon=ft891remote-server
+Terminal=false
+Categories=HamRadio;Network;AudioVideo;
+Keywords=ham;radio;yaesu;ft-891;cat;remote;

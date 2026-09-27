@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+    <qresource prefix="/qml">
+        <file>qmldir</file>
+        <file>Ui.qml</file>
+        <file>Main.qml</file>
+        <file>LcdDisplay.qml</file>
+        <file>MeterBar.qml</file>
+        <file>PanelKey.qml</file>
+        <file>Icon.qml</file>
+        <file>PageTabs.qml</file>
+        <file>LevelSlider.qml</file>
+        <file>FrontPanel.qml</file>
+        <file>SettingRow.qml</file>
+        <file>SettingsList.qml</file>
+        <file>CwPage.qml</file>
+        <file>MenuPage.qml</file>
+        <file>MemoryPage.qml</file>
+        <file>SetupPage.qml</file>
+        <file>WrapCheck.qml</file>
+        <file>LogPage.qml</file>
+        <file>LineLog.qml</file>
+    </qresource>
+</RCC>

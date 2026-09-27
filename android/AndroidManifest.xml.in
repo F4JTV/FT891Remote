@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!-- Configured by CMake: the version follows project() in CMakeLists.txt. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.ft891remote.client"
+          android:versionCode="@RR_ANDROID_VERSION_CODE@"
+          android:versionName="@PROJECT_VERSION@"
+          android:installLocation="auto">
+
+    <!-- Microphone capture and the network link to the station. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!-- Without a foreground service Android suspends the app as soon as the
+         screen goes off, and the audio stops in the middle of a contact. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Keeps Wi-Fi at full performance: power saving leaves holes in the
+         audio stream. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-feature android:name="android.hardware.audio.low_latency" android:required="false"/>
+    <uses-feature android:name="android.hardware.audio.pro" android:required="false"/>
+
+    <supports-screens android:largeScreens="true" android:normalScreens="true"
+                      android:anyDensity="true" android:smallScreens="true"/>
+
+    <application android:name="org.qtproject.qt.android.bindings.QtApplication"
+                 android:label="FT891Remote"
+                 android:icon="@drawable/icon"
+                 android:hardwareAccelerated="true"
+                 android:allowBackup="true">
+
+        <!-- Portrait only: the phone layout is a single column (display,
+             pages, PTT), and turning the phone must not rebuild it in a
+             landscape shape it was not designed for. -->
+        <activity android:name="org.ft891remote.client.Ft891RemoteActivity"
+                  android:label="FT891Remote"
+                  android:exported="true"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait"
+                  android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
+                  android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
+            <meta-data android:name="android.app.arguments" android:value="-- %%INSERT_APP_ARGUMENTS%% --"/>
+            <meta-data android:name="android.app.extract_android_style" android:value="minimal"/>
+
+            <!-- Shown until Qt draws its first frame. -->
+            <meta-data android:name="android.app.splash_screen_drawable"
+                       android:resource="@drawable/splash"/>
+            <meta-data android:name="android.app.splash_screen_sticky"
+                       android:value="false"/>
+        </activity>
+
+        <!-- Keeps the audio running with the screen off, and holds the Wi-Fi
+             and CPU locks. Declared as a microphone service: Android 14
+             requires it as soon as a service captures sound. -->
+        <service android:name="org.ft891remote.client.Ft891RemoteService"
+                 android:exported="false"
+                 android:stopWithTask="true"
+                 android:foregroundServiceType="microphone"/>
+    </application>
+</manifest>

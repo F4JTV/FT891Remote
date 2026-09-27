@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The same background as the application: no flash between the splash
+         screen and the first frame. -->
+    <color name="splash_background">#1C222C</color>
+</resources>

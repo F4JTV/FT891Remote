@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=FT891Remote
+GenericName=Remote front panel
+Comment=Operate a Yaesu FT-891 from anywhere
+Exec=@BINDIR@/ft891remote
+Icon=ft891remote
+Terminal=false
+Categories=HamRadio;Network;AudioVideo;
+Keywords=ham;radio;yaesu;ft-891;cat;remote;transceiver;
