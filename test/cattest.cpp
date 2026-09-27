@@ -113,6 +113,16 @@ int main(int argc, char *argv[])
           QStringLiteral("TNR read through AC; — value « %1 » (the tuner state is its last digit)")
               .arg(vals.value(QStringLiteral("TNR"))));
 
+    // A tuning cycle: the radio answers 2 while it tunes, then 1 — the tuner
+    // on. Read only once, early, it stayed at 2 ("Start tuning") after the
+    // cycle had ended.
+    radio.startTune();
+    { const bool ok_ = waitFor([&] { return vals.value(QStringLiteral("TNR")) == QLatin1String("2"); }, 3000);
+      check(ok_, "TNR answers 2 while the radio tunes"); }
+    { const bool ok_ = waitFor([&] { return vals.value(QStringLiteral("TNR")) == QLatin1String("1"); }, 10000);
+      check(ok_, QStringLiteral("after the cycle, the tuner is on: TNR « %1 »").arg(vals.value(QStringLiteral("TNR")))); }
+    waitFor([&] { return !st.ptt; }, 5000);
+
     // ------------------------------------------------------ frequency, mode
     out << "Frequency and mode" << Qt::endl;
     radio.command(QStringLiteral("freq"), {{QStringLiteral("hz"), 7074000.0}, {QStringLiteral("vfo"), QStringLiteral("A")}});

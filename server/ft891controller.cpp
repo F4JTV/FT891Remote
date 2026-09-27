@@ -1062,9 +1062,22 @@ void Ft891Controller::startTune()
 {
     m_link->submit("AC002;", {}, Ft891Link::User);
     emit logMessage(tr("Tuner cycle started"));
-    QTimer::singleShot(400, this, [this] {
-        if (const CatCommand *c = ft891::command(QStringLiteral("TNR")))
-            submitRead(*c, Ft891Link::ReadBack, QStringLiteral("rb:"));
+    m_tuneClock.start();
+    QTimer::singleShot(400, this, &Ft891Controller::watchTune);
+}
+
+// The radio answers 2 while it tunes and 1 once the tuner is on. Read once,
+// 400 ms in, the tuner stayed at 2 — "Start tuning" — after the cycle had
+// ended. It is read until the cycle is over: at least 3 s, while it answers
+// 2, and 30 s at most.
+void Ft891Controller::watchTune()
+{
+    if (const CatCommand *c = ft891::command(QStringLiteral("TNR")))
+        submitRead(*c, Ft891Link::ReadBack, QStringLiteral("rb:"));
+    QTimer::singleShot(700, this, [this] {
+        const qint64 t = m_tuneClock.elapsed();
+        const bool tuning = m_values.value(QStringLiteral("TNR")) == QLatin1String("2");
+        if (t < 30000 && (tuning || t < 3000)) watchTune();
     });
 }
 

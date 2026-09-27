@@ -18,6 +18,9 @@ laid out the way the radio lays it out.
 
 ## Screenshots
 
+Taken with the FT-891 simulator of `test/`, the real server and the real
+client on one machine.
+
 | Desktop client | Transmitting |
 |---|---|
 | ![Front panel and FUNCTION-1 page](docs/screenshots/client-desktop-01-panel.png) | ![PO, SWR, ALC and COMP meters while transmitting](docs/screenshots/client-desktop-02-transmit.png) |
@@ -167,7 +170,9 @@ configures and compiles, gathers the programs with the Qt runtime, the QML
 modules, PortAudio, Opus and the Visual C++ redistributable into
 `installer\dist`, and compiles `installer\FT891Remote.iss` into
 `installer\output\FT891Remote-<version>-setup.exe`. Edit `QT_DIR` and
-`VCPKG_ROOT` at the top of the script if yours differ.
+`VCPKG_ROOT` at the top of the script if yours differ. The script names that
+Qt to CMake explicitly, so a Qt that vcpkg holds for another project is never
+picked up in its place.
 
 | Option | Effect |
 |---|---|

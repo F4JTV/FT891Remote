@@ -10,6 +10,7 @@
 
 #include <QHash>
 #include <QMetaType>
+#include <QElapsedTimer>
 #include <QObject>
 #include <QSet>
 #include <QString>
@@ -101,6 +102,9 @@ private:
     void readMemories(bool bulk);
     void doMemoryWrite(const QVariantMap &args);
     void doMemoryRecall(const QString &channel);
+    // TNR read until a tuning cycle is over.
+    void watchTune();
+    QElapsedTimer m_tuneClock;
     // Memories are read one at a time, and an answer is kept only if it
     // names the channel asked for: see readNextMemory().
     QStringList m_memQueue;

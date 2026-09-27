@@ -10,6 +10,25 @@ namespace rr {
 QString settingsOrganisation() { return QStringLiteral("FT891Remote"); }
 QString settingsApplication()  { return QStringLiteral("FT891RemoteServer"); }
 
+QString legacyDeviceName(const QString &name)
+{
+    return QString::fromLocal8Bit(name.toUtf8());
+}
+
+// The device's name as the list shows it now, for a name saved garbled by an
+// earlier version: the window then finds it in its lists, and the next save
+// stores it right.
+static QString currentDeviceName(const QString &saved, bool input)
+{
+    if (saved.isEmpty()) return saved;
+    const QList<AudioDevice> devices = input ? AudioEngine::inputDevices() : AudioEngine::outputDevices();
+    for (const AudioDevice &d : devices)
+        if (d.name == saved) return saved;
+    for (const AudioDevice &d : devices)
+        if (legacyDeviceName(d.name) == saved) return d.name;
+    return saved;
+}
+
 int audioDeviceByName(const QString &wanted, bool input, int hostApi)
 {
     if (wanted.isEmpty())
@@ -19,6 +38,10 @@ int audioDeviceByName(const QString &wanted, bool input, int hostApi)
                                              : AudioEngine::outputDevices(hostApi);
     for (const AudioDevice &d : devices)
         if (d.name == wanted) return d.index;
+    // A name saved by an earlier version, which read PortAudio's UTF-8 in the
+    // local code page: on Windows an accented name was saved garbled.
+    for (const AudioDevice &d : devices)
+        if (legacyDeviceName(d.name) == wanted) return d.index;
     // Windows appends the host API or a number to a name that returns after
     // being unplugged: a partial match is better than nothing.
     for (const AudioDevice &d : devices)
@@ -81,8 +104,8 @@ StationConfig loadStationConfig(QSettings &s)
     k.holdPtt      = s.value(QStringLiteral("cwHoldPtt"), false).toBool();
     k.wpm          = s.value(QStringLiteral("cwWpm"), 20).toInt();
 
-    c.audioIn  = s.value(QStringLiteral("audioIn")).toString();
-    c.audioOut = s.value(QStringLiteral("audioOut")).toString();
+    c.audioIn  = currentDeviceName(s.value(QStringLiteral("audioIn")).toString(), true);
+    c.audioOut = currentDeviceName(s.value(QStringLiteral("audioOut")).toString(), false);
     c.hostApi  = s.value(QStringLiteral("hostApi")).toString();
     return c;
 }

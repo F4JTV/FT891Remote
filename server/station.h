@@ -40,6 +40,9 @@ void saveStationConfig(QSettings &s, const StationConfig &c);
 // Device index for a saved name; the system default for an empty name,
 // -1 if the device is gone.
 int audioDeviceByName(const QString &name, bool input, int hostApi = -1);
+// A device name as earlier versions saved it: PortAudio's UTF-8 read in the
+// local code page (garbled on Windows when accented; the same on Linux).
+QString legacyDeviceName(const QString &name);
 
 class Station : public QObject {
     Q_OBJECT

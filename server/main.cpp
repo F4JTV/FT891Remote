@@ -6,6 +6,10 @@
 #include <QMetaType>
 #include <QTextStream>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 #include "../common/audioengine.h"
 #include "../common/i18n.h"
 #include "../common/protocol.h"
@@ -80,6 +84,11 @@ void identify(QCoreApplication &app)
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_WIN
+    // Logs and --list-audio are written in UTF-8: the console must read them
+    // so, or an accented device name comes out garbled there too.
+    SetConsoleOutputCP(CP_UTF8);
+#endif
     if (hasArg(argc, argv, "--help") || hasArg(argc, argv, "-h")) {
         printUsage();
         return 0;

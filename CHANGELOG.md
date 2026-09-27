@@ -3,6 +3,43 @@
 Every fix and every feature moves the version: `./bump_version.sh patch|minor|major "what changed"`
 updates CMakeLists.txt, this file, the Debian changelog and the AppStream release list together.
 
+## 0.1.28 — 2026-09-27
+
+- After an ATU cycle the client stayed on "Start tuning" although the
+  radio had its tuner on. The server read the tuner once, 400 ms after
+  starting the cycle, while the radio still answered 2 (tuning), and never
+  again. It now reads it until the cycle is over — at least 3 s, then while
+  it answers 2, 30 s at most — so the client shows ON when the radio does.
+- Client, panel: the TUNE key stays lit while the tuner is on, as the
+  radio's TUNE indicator; red during the cycle, as before.
+- Simulator: the tuner answers 2 while it tunes, as the radio does;
+  ft891-cattest checks a whole tuning cycle (70 checks).
+
+## 0.1.27 — 2026-09-27
+
+- Audio device names with accents were garbled on Windows ("pÃ©riphÃ©rique"
+  for "périphérique"), in the client and in the server. PortAudio gives its
+  names in UTF-8, and the audio engine, shared by both programs, read them in
+  the local code page — the same as UTF-8 on Linux, but not on Windows. They
+  are now read as UTF-8, with PortAudio's other strings.
+- Server: a device saved under its garbled name by an earlier version is
+  still found, and its name is corrected at the next save. The client saves
+  its devices by number and needed nothing more.
+- Server on Windows: the console is switched to UTF-8, so that logs and
+  --list-audio show accented names right.
+
+## 0.1.26 — 2026-09-27
+
+- Windows build: configuration failed with "Failed to find required Qt
+  component Quick" on a machine where vcpkg also holds a Qt, installed for
+  another project without Qt Quick. The vcpkg toolchain puts its own
+  packages first in CMake's search, so that Qt was found instead of the one
+  at QT_DIR — for Core, Gui and Network too, which would have mixed two Qt
+  versions between build and deployment. build_all.bat now names the Qt at
+  QT_DIR outright (Qt6_DIR), turns off vcpkg's copying of its own DLLs,
+  clears a build cache that still points at vcpkg's Qt, and checks before
+  configuring that the Qt at QT_DIR has Qt Quick and Qt Serial Port.
+
 ## 0.1.25 — 2026-09-27
 
 - Every command of the description has now been tried on a real FT-891:

@@ -1,3 +1,22 @@
+ft891remote (0.1.28) stable; urgency=medium
+
+  * After an ATU cycle the tuner is shown ON, and the TUNE key stays lit
+    while the tuner is on.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sun, 27 Sep 2026 08:16:54 +0000
+
+ft891remote (0.1.27) stable; urgency=medium
+
+  * Audio device names read as UTF-8: accented names shown right on Windows.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sun, 27 Sep 2026 08:07:18 +0000
+
+ft891remote (0.1.26) stable; urgency=medium
+
+  * Windows build: the Qt at QT_DIR is named to CMake; vcpkg's Qt is never used.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sun, 27 Sep 2026 06:24:04 +0000
+
 ft891remote (0.1.25) stable; urgency=medium
 
   * Every command tried on the radio: no "untested" label in the client.

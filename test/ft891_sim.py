@@ -360,8 +360,10 @@ class FT891:
             return "GT0" + v
         if frame == "AC002":
             self.tune_until = now + 2.5
-            self.store("TNR", "AC001")
+            self.store("TNR", "AC001")   # the tuner is on once the cycle ends
             return None
+        if frame == "AC" and now < self.tune_until:
+            return "AC002"                # as the radio answers while it tunes
         if re.fullmatch(r"KY[6-9A]", frame):
             # A TEXT memory, written with KM, is played by KY6-KYA.
             if self.mode not in ("3", "7") or self.by_code["KEYER"].value != "1":
