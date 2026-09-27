@@ -1,0 +1,2 @@
+module FT891Remote
+singleton Radio 1.0 Radio.qml

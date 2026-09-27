@@ -1,0 +1,59 @@
+.TH FT891REMOTE-SERVER 1 "September 2026" "FT891Remote" "User Commands"
+.SH NAME
+ft891remote\-server \- share a Yaesu FT\-891 over the network
+.SH SYNOPSIS
+.B ft891remote\-server
+.RI [ --headless " [" --config " " FILE "] [" \-v ]]
+.br
+.B ft891remote\-server
+.RB [ \-\-list\-audio | \-\-list\-ports | \-\-help ]
+.SH DESCRIPTION
+Runs next to a Yaesu FT\-891 and serves its audio, PTT and CAT control to a
+remote client. The radio is driven through its own CAT protocol, without
+Hamlib: every setting the radio exposes over CAT, the whole MENU included, can
+be read and changed from the client.
+.PP
+Audio travels over UDP, control over TCP. The PTT is sent on both at once, so a
+lost datagram never leaves the radio transmitting, and the server releases it
+by itself if the client goes silent. Transmission is refused outside the
+amateur bands of the configured IARU region.
+.SH OPTIONS
+.TP
+.B \-\-headless
+Run without a desktop session, logging to standard output. The settings are the
+ones saved by the graphical interface: configure once with a display, then run
+without one.
+.TP
+.BI \-\-config " FILE"
+Read an .ini file instead of the saved settings. Lets one machine serve several
+radios, each with its own file and ports.
+.TP
+.B \-v ", " \-\-verbose
+Also log frequency and mode changes. Without it, only transmit switches,
+connections and errors are logged.
+.TP
+.B \-\-list\-audio
+Print every audio interface and device PortAudio can see, with the sample rate
+each one accepts, then exit. Use the names it prints in an .ini file.
+.TP
+.B \-\-list\-ports
+Print the serial ports, then exit. The FT\-891 shows two: CAT goes through the
+Enhanced one (usually
+.IR /dev/ttyUSB0 ),
+the Standard one can carry RTS/DTR PTT.
+.SH FILES
+.TP
+.I ~/.config/FT891Remote/FT891RemoteServer.conf
+Settings: CAT port and speed, PTT method, audio devices, network ports,
+password, IARU region.
+.SH NOTES
+Opening a serial port requires membership of the
+.B dialout
+group. The radio's menu 05\-06 CAT RATE must match the configured speed.
+.PP
+A systemd user unit is installed. Enable it with
+.RB "\(aq" "systemctl --user enable --now ft891remote-server" "\(aq" ,
+and allow it to run without an open session with
+.RB "\(aq" "sudo loginctl enable-linger $USER" "\(aq" .
+.SH SEE ALSO
+.BR ft891remote (1)

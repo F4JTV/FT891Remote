@@ -1,0 +1,195 @@
+ft891remote (0.1.25) stable; urgency=medium
+
+  * Every command tried on the radio: no "untested" label in the client.
+  * README for publication.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sun, 27 Sep 2026 05:28:07 +0000
+
+ft891remote (0.1.24) stable; urgency=medium
+
+  * Client: the IPO badge is lit when IPO is selected, as on the radio.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 16:52:23 +0000
+
+ft891remote (0.1.23) stable; urgency=medium
+
+  * Android: the client opens full screen, as RemoteRig.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 14:44:00 +0000
+
+ft891remote (0.1.22) stable; urgency=medium
+
+  * Server: memories filed under the channel read; the FT-891 writes its
+    current channel in the MR answer, not the one read.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 14:02:22 +0000
+
+ft891remote (0.1.21) stable; urgency=medium
+
+  * Client: Disconnect is announced; Connect works again afterwards.
+  * Server: memories read one at a time, each answer checked against the
+    channel asked for.
+  * Client: memory channel up/down keys removed from FUNCTION-2.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 13:37:03 +0000
+
+ft891remote (0.1.20) stable; urgency=medium
+
+  * rigctld: commands naming the VFO (fldigi) are read correctly; frequency
+    and PTT from fldigi reach the radio.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 11:07:34 +0000
+
+ft891remote (0.1.19) stable; urgency=medium
+
+  * Client: memories can be written again; frequencies in the grouped
+    form 7.100.000 are read.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 09:34:26 +0000
+
+ft891remote (0.1.18) stable; urgency=medium
+
+  * Client: CAT tab removed; the server no longer takes raw CAT frames
+    from the network.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 09:09:09 +0000
+
+ft891remote (0.1.17) stable; urgency=medium
+
+  * Client: APF shown with its frequency in one section.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 09:00:17 +0000
+
+ft891remote (0.1.16) stable; urgency=medium
+
+  * Client: PRC, MON, NB, NCH, DNR and CNT shown with their setting in one
+    section, as IF SHIFT and WIDTH.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 08:55:43 +0000
+
+ft891remote (0.1.15) stable; urgency=medium
+
+  * CW: TEXT memories and typed text played with KY6-KYA again; the radio
+    refuses KY1-KY5 for them.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 08:33:16 +0000
+
+ft891remote (0.1.14) stable; urgency=medium
+
+  * Switches send their command's own values (MON, NCH, CNT, APF).
+  * IF SHIFT and WIDTH with their ON/OFF digit, as the radio has them.
+  * Memory up/down select the next used channel with MC; PMS names shown.
+  * CW memories played by the command of their type (TEXT or MESSAGE).
+  * BK-IN delay in 10 ms steps.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Sat, 26 Sep 2026 07:16:07 +0000
+
+ft891remote (0.1.13) stable; urgency=medium
+
+  * ft891-fieldtest: guided test on the real radio, with snapshot and
+    restore of every setting, menu and memory.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 15:55:17 +0000
+
+ft891remote (0.1.12) stable; urgency=medium
+
+  * Client: MEMORY page — list, edit, write, recall; Read all includes
+    the memories (MR, MW, MC).
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 14:02:10 +0000
+
+ft891remote (0.1.11) stable; urgency=medium
+
+  * CAT description checked against the FT-891 CAT reference: IF clarifier
+    fields, KY1-KY5 for text memories, BS12 MW and no 60 m key, AGC AUTO
+    answers, TX labels, SPLIT read through RI; QS, CH and SC added.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 13:40:47 +0000
+
+ft891remote (0.1.10) stable; urgency=medium
+
+  * WIDTH follows the SH table of the CAT reference, by mode and NARROW.
+  * WIDTH and IF SHIFT sent in the reference's format (no ON/OFF digit).
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 12:14:27 +0000
+
+ft891remote (0.1.9) stable; urgency=medium
+
+  * The versions of menu 18 are read and shown; Read all reads them too.
+  * ft891-cattest measures Read all and lists any setting left without value.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 06:03:21 +0000
+
+ft891remote (0.1.8) stable; urgency=medium
+
+  * Client: modes chosen by family (SSB, CW, AM, FM, RTTY, DATA); the
+    display shows the mode the radio reports, read back after every change.
+  * Client: the filter width follows the mode.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 05:29:37 +0000
+
+ft891remote (0.1.7) stable; urgency=medium
+
+  * Client: keyer memory text is sent as typed; Set used to send the old
+    text.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 05:15:05 +0000
+
+ft891remote (0.1.6) stable; urgency=medium
+
+  * Server: an SCU-17 (same CP2105 chip) is no longer taken for the FT-891;
+    the radio is recognised once it has answered ID0650.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 05:07:16 +0000
+
+ft891remote (0.1.5) stable; urgency=medium
+
+  * Server: serial ports scanned once every tab exists; Key port filled.
+  * Server: the FT-891's Enhanced and Standard ports recognised and labelled.
+  * Server: saved ports selected by name; missing ones marked.
+  * Server: the radio's keyer is no longer left off when the server stops
+    during a CW message.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 04:57:22 +0000
+
+ft891remote (0.1.4) stable; urgency=medium
+
+  * Server: explanations readable in a dark theme.
+  * Server: CM108 GPIO PTT and its udev rule removed.
+  * Server: PTT tone removed.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Fri, 25 Sep 2026 04:45:18 +0000
+
+ft891remote (0.1.3) stable; urgency=medium
+
+  * Client: keys of equal height on the Panel page.
+  * Client: drawn icons instead of symbol characters missing on Android.
+  * Client: the Setup page fits the width of a phone.
+  * Android: portrait only.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Thu, 24 Sep 2026 15:47:01 +0000
+
+ft891remote (0.1.2) stable; urgency=medium
+
+  * make_deb.sh; manual pages, AppStream metadata, lintian-clean package.
+  * Client-only builds no longer need the Qt serial port module.
+  * Windows: dependency setup, QML deployment check, Visual C++ runtime.
+  * Android: --setup installs the toolchain on Ubuntu 24.04.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Thu, 24 Sep 2026 11:10:49 +0000
+
+ft891remote (0.1.1) stable; urgency=medium
+
+  * Client: a second row of keys was hidden under the next control.
+  * Client: setting values were cut short in their title line.
+  * Client: short text in the CAT terminal and the log sat at the bottom.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Thu, 24 Sep 2026 09:04:38 +0000
+
+ft891remote (0.1.0) stable; urgency=medium
+
+  * First release: a Hamlib-free remote station for the Yaesu FT-891,
+    derived from RemoteRig 1.17.1. Native CAT engine, full settings over
+    the network, Qt Quick client for the desktop and Android.
+
+ -- FT891Remote Community <noreply@ft891remote.invalid>  Thu, 24 Sep 2026 06:22:48 +0000

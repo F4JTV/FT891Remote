@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>ft891remote-server.png</file>
+        <file>ft891remote.png</file>
+    </qresource>
+</RCC>

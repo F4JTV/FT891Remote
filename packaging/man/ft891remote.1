@@ -1,0 +1,26 @@
+.TH FT891REMOTE 1 "September 2026" "FT891Remote" "User Commands"
+.SH NAME
+ft891remote \- remote front panel for a Yaesu FT\-891
+.SH SYNOPSIS
+.B ft891remote
+.SH DESCRIPTION
+Connects to an
+.BR ft891remote\-server (1)
+and operates the radio from wherever the operator is: two\-way audio, PTT,
+frequency and mode, the front\-panel keys and levels, the FUNCTION, CW and FM
+settings, the keyer memories and the whole MENU.
+.PP
+The frequency display is a tuning surface: the mouse wheel tunes by the current
+step (Shift for ten steps), a horizontal drag does the same on a touch screen,
+and a click opens direct entry. The space bar is push\-to\-talk when no text
+field has the focus.
+.PP
+An optional rigctld\-compatible port on 127.0.0.1:4532 lets WSJT\-X, fldigi or
+JS8Call drive the remote radio: frequency, mode, split and PTT.
+.SH FILES
+.TP
+.I ~/.config/FT891Remote/FT891RemoteClient.conf
+Settings: station address, password, audio devices, codec, tuning step, CW
+macros.
+.SH SEE ALSO
+.BR ft891remote\-server (1)

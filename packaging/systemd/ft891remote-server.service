@@ -1,0 +1,26 @@
+# User unit: the station starts with the session, without root, with the
+# configuration of the account that set it up.
+#
+#   systemctl --user enable --now ft891remote-server
+#   journalctl --user -u ft891remote-server -f
+#
+# To have it run without anyone logging in, once:
+#   sudo loginctl enable-linger $USER
+
+[Unit]
+Description=FT891Remote station server (Yaesu FT-891)
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ft891remote-server --headless
+Restart=on-failure
+RestartSec=5
+
+# Real-time audio does not like being pushed aside by the rest of the system.
+Nice=-5
+IOSchedulingClass=realtime
+
+[Install]
+WantedBy=default.target
